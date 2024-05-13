@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7kbgteggdhyc"]
+
+[ext_resource type="Script" path="res://scripts/WaterCounter.gd" id="1_b1x0v"]
+[ext_resource type="Script" path="res://scripts/ComboPrompt.gd" id="2_xrd4v"]
+[ext_resource type="Texture2D" uid="uid://dsfu5v1pkt422" path="res://icon.svg" id="3_ri03x"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="4_sjtla"]
+[ext_resource type="Script" path="res://scripts/GameCamera.gd" id="5_kuom0"]
+
+[node name="Main" type="Node2D"]
+
+[node name="WaterTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="WaterCounter" type="Label" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 17.0
+offset_top = -12.0
+offset_right = 57.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+script = ExtResource("1_b1x0v")
+
+[node name="ComboPrompt" type="Label" parent="."]
+offset_left = -81.0
+offset_top = -50.0
+offset_right = -41.0
+offset_bottom = -10.0
+script = ExtResource("2_xrd4v")
+
+[node name="Player" type="Sprite2D" parent="."]
+position = Vector2(-74, 3)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_ri03x")
+script = ExtResource("4_sjtla")
+
+[node name="CoughTimer" type="Timer" parent="Player"]
+
+[node name="GameCamera" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+script = ExtResource("5_kuom0")
