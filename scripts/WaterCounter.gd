@@ -6,7 +6,7 @@ func _ready():
 	GameState.water_finished.connect(remove_water)
 
 func add_water():
-	$"../WaterCounter".text = str(int($"../WaterCounter".text) + 1)
+	text = str(int($"../WaterCounter".text) + 1)
 
 func remove_water():
-	$"../WaterCounter".text = str(int($"../WaterCounter".text) - 1)
+	text = str(int($"../WaterCounter".text) - 1)

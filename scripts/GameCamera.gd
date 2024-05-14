@@ -27,3 +27,6 @@ func shake():
 	var amount = pow(_trauma, _trauma_power)
 	offset.x = max_offset.x * amount * randf_range(-1, 1)
 	offset.y = max_offset.y * amount * randf_range(-1, 1)
+
+func _on_game_start():
+	$AnimationPlayer.play("StartSweep")

@@ -4,6 +4,7 @@ signal water_spawned
 signal water_held
 signal water_gulped
 signal gulp_failed
+signal cough_stopped
 signal water_finished
 
 
@@ -53,5 +54,10 @@ func get_random_combo() -> String:
 	return combo
 			
 			
-
+func start():
+	get_tree().current_scene.get_node("Menu").queue_free()
+	get_tree().current_scene.get_node("WaterTimer").start()
+	
+func stop_cough():
+	cough_stopped.emit()
 
