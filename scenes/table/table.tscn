@@ -11,7 +11,6 @@ texture_filter = 1
 position = Vector2(5.96046e-08, -2)
 texture = ExtResource("1_py6xe")
 script = ExtResource("2_20gqr")
-offset_x_range = 20.0
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 1,
 "keep_anim_length": false,
@@ -30,8 +29,24 @@ metadata/_aseprite_wizard_source_file_hash_ = "9400f15e69247f949b690cbada7acff1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -1.54475)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_5i05a")
 
-[node name="Placement" type="Node2D" parent="."]
-position = Vector2(-3.63798e-12, -7.6418)
+[node name="Positions" type="Node2D" parent="."]
+position = Vector2(-5.96046e-08, -5)
+
+[node name="0" type="Node2D" parent="Positions"]
+position = Vector2(-8, -8)
+
+[node name="1" type="Node2D" parent="Positions"]
+position = Vector2(-4, -8)
+
+[node name="2" type="Node2D" parent="Positions"]
+position = Vector2(0, -8)
+
+[node name="3" type="Node2D" parent="Positions"]
+position = Vector2(4, -8)
+
+[node name="4" type="Node2D" parent="Positions"]
+position = Vector2(8, -8)
+
+[node name="Glasses" type="Node2D" parent="."]

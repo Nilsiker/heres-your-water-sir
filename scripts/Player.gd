@@ -32,14 +32,14 @@ func _unhandled_input(event):
 
 	elif event.is_action_pressed("Q"):
 		if holding and holding.peek() == "Q":			
-			holding.pop()
+			holding.gulp()
 			GameState.gulp(holding)
 		else:
 			GameState.choke(holding)
 
 	elif event.is_action_pressed("A"):
 		if holding and  holding.peek() == "A":
-			holding.pop()
+			holding.gulp()
 			GameState.gulp(holding)
 		else:
 			GameState.choke(holding)

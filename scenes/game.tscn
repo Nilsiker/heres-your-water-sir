@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c7kbgteggdhyc"]
+[gd_scene load_steps=18 format=3 uid="uid://c7kbgteggdhyc"]
 
 [ext_resource type="PackedScene" uid="uid://cixlvycbpq6tp" path="res://scenes/background/background.tscn" id="1_vii0p"]
 [ext_resource type="Script" path="res://scripts/WaterCounter.gd" id="2_683tf"]
@@ -7,10 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://w1c5oxilg2qv" path="res://scenes/player/player.tscn" id="5_blry0"]
 [ext_resource type="Script" path="res://scripts/GameCamera.gd" id="6_qtihm"]
 [ext_resource type="PackedScene" uid="uid://cm76qk02n1vyn" path="res://scenes/table/table.tscn" id="7_8he3r"]
-[ext_resource type="Script" path="res://scripts/Arm.gd" id="8_bc0oy"]
 [ext_resource type="PackedScene" uid="uid://c1tm30shsujbh" path="res://scenes/background/floor.tscn" id="10_8yy4c"]
+[ext_resource type="PackedScene" uid="uid://d14rnp07l3evn" path="res://scenes/hand/hand.tscn" id="10_y8dhq"]
 [ext_resource type="PackedScene" uid="uid://dnh8ekq3l7hyb" path="res://scenes/chair/chair.tscn" id="11_0xr2v"]
-[ext_resource type="Texture2D" uid="uid://g86xrvrlega3" path="res://scenes/chair.png" id="11_7ty7v"]
 [ext_resource type="PackedScene" uid="uid://c3o63a1cwy26t" path="res://scenes/lamp/lamp.tscn" id="11_g0a4j"]
 
 [sub_resource type="Animation" id="Animation_qbgsv"]
@@ -77,7 +76,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0.784582, 2),
 "update": 0,
-"values": [Vector2(0, 5), Vector2(0, 0)]
+"values": [Vector2(0, 3), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0vylt"]
@@ -89,6 +88,7 @@ _data = {
 [node name="Game" type="Node2D"]
 
 [node name="WaterTimer" type="Timer" parent="."]
+wait_time = 2.0
 
 [node name="Background" parent="." instance=ExtResource("1_vii0p")]
 position = Vector2(-1, 2)
@@ -196,23 +196,20 @@ autoplay = "StartSweep"
 [node name="Table" parent="." instance=ExtResource("7_8he3r")]
 unique_name_in_owner = true
 position = Vector2(-25, 18)
-offset_x_range = 1.0
-
-[node name="Arm" type="Sprite2D" parent="."]
-script = ExtResource("8_bc0oy")
 
 [node name="Floor" parent="." instance=ExtResource("10_8yy4c")]
 position = Vector2(0, 26)
 
 [node name="Chair" parent="." instance=ExtResource("11_0xr2v")]
 position = Vector2(-40, 19)
-texture = ExtResource("11_7ty7v")
 
 [node name="Player" parent="." instance=ExtResource("5_blry0")]
 position = Vector2(-41, 15)
 
+[node name="Hand" parent="." instance=ExtResource("10_y8dhq")]
+position = Vector2(5, -14)
+
 [node name="Lamp" parent="." instance=ExtResource("11_g0a4j")]
-visible = false
 position = Vector2(-22, -33)
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -226,15 +223,15 @@ anchor_bottom = 0.5
 offset_right = 31.0
 offset_bottom = 58.0
 grow_vertical = 2
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.3, 0.3)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 8
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 32
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 16
 text = "U"
 script = ExtResource("3_kan5k")
 
@@ -243,6 +240,10 @@ libraries = {
 "": SubResource("AnimationLibrary_0vylt")
 }
 autoplay = "Sway"
+
+[node name="HandOriginalPosition" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(5, -14)
 
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="Menu" method="play"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="GameCamera" method="_on_game_start"]
