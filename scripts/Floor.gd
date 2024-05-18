@@ -14,4 +14,4 @@ func _process(delta):
 
 func _on_crash_area_body_entered(body:Node2D):
 	if body is Glass:
-		body.shatter(body.global_position)	# todo refine pos (physicsserver?)
+		body.shatter()

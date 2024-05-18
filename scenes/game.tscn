@@ -1,52 +1,34 @@
-[gd_scene load_steps=18 format=3 uid="uid://c7kbgteggdhyc"]
+[gd_scene load_steps=31 format=3 uid="uid://c7kbgteggdhyc"]
 
+[ext_resource type="Script" path="res://Godot Plugin 1.3/OvaniPlayer.gd" id="1_ts23s"]
 [ext_resource type="PackedScene" uid="uid://cixlvycbpq6tp" path="res://scenes/background/background.tscn" id="1_vii0p"]
-[ext_resource type="Script" path="res://scripts/WaterCounter.gd" id="2_683tf"]
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="2_ipxfd"]
+[ext_resource type="AudioStream" uid="uid://bbtytopqlgrqn" path="res://audio/Horror Suspense 2/Atmospheres And Loops/Crumbling Building Loop.wav" id="2_r0scf"]
+[ext_resource type="Theme" uid="uid://61ii6arynmf1" path="res://fonts/font_theme.tres" id="3_dslcu"]
 [ext_resource type="Script" path="res://scripts/ComboPrompt.gd" id="3_kan5k"]
 [ext_resource type="PackedScene" uid="uid://w1c5oxilg2qv" path="res://scenes/player/player.tscn" id="5_blry0"]
+[ext_resource type="Script" path="res://Godot Plugin 1.3/OvaniSong.gd" id="5_kvyi6"]
 [ext_resource type="Script" path="res://scripts/GameCamera.gd" id="6_qtihm"]
 [ext_resource type="PackedScene" uid="uid://cm76qk02n1vyn" path="res://scenes/table/table.tscn" id="7_8he3r"]
 [ext_resource type="PackedScene" uid="uid://c1tm30shsujbh" path="res://scenes/background/floor.tscn" id="10_8yy4c"]
 [ext_resource type="PackedScene" uid="uid://d14rnp07l3evn" path="res://scenes/hand/hand.tscn" id="10_y8dhq"]
 [ext_resource type="PackedScene" uid="uid://dnh8ekq3l7hyb" path="res://scenes/chair/chair.tscn" id="11_0xr2v"]
 [ext_resource type="PackedScene" uid="uid://c3o63a1cwy26t" path="res://scenes/lamp/lamp.tscn" id="11_g0a4j"]
+[ext_resource type="Script" path="res://scripts/EventManager.gd" id="15_0tk5s"]
+[ext_resource type="AudioStream" uid="uid://s5m4wy7w3iea" path="res://audio/Hollywood Action 2/Environment/Misc/Heavy Object Move 003.wav" id="16_balx4"]
+[ext_resource type="AudioStream" uid="uid://d4l8xrmxuge7b" path="res://audio/Hollywood Action 2/Environment/Misc/Heavy Object Move 001.wav" id="16_k8dpp"]
+[ext_resource type="AudioStream" uid="uid://dp1ocqptc4ilv" path="res://audio/roar.mp3" id="18_mu86q"]
+[ext_resource type="AudioStream" uid="uid://b2abl65uwk7et" path="res://audio/Hollywood Action 2/Environment/Doors/Metal Door Open 002.wav" id="19_j6t78"]
+[ext_resource type="AudioStream" uid="uid://dpk8grv8t21nn" path="res://audio/Hollywood Action 2/Environment/Misc/Heavy Object Move 002.wav" id="20_qtixg"]
+[ext_resource type="AudioStream" uid="uid://cccbx57jhqwli" path="res://audio/Horror Suspense 2/Impacts And Swooshes/Misc/Void Scream 002.wav" id="21_u7f51"]
+[ext_resource type="AudioStream" uid="uid://dfiqfcrksn234" path="res://audio/Hollywood Action 2/Environment/Doors/Metal Door Open 003.wav" id="22_2mvdm"]
+[ext_resource type="AudioStream" uid="uid://c0i0ggp72tlyj" path="res://audio/Horror Suspense 2/Voice/Realistic/Horror Scream Male 001.wav" id="23_avyw2"]
 
-[sub_resource type="Animation" id="Animation_qbgsv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-80.605, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_bdxeq"]
-resource_name = "StartSweep"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(-2.5, 1),
-"update": 0,
-"values": [Vector2(-80, 0), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nvdvr"]
-_data = {
-"RESET": SubResource("Animation_qbgsv"),
-"StartSweep": SubResource("Animation_bdxeq")
-}
+[sub_resource type="Resource" id="Resource_at46k"]
+script = ExtResource("5_kvyi6")
+Loop60 = ExtResource("2_r0scf")
+ReverbTail = 2.0
+SongMode = 2
 
 [sub_resource type="Animation" id="Animation_rnbi0"]
 length = 0.001
@@ -85,10 +67,127 @@ _data = {
 "Sway": SubResource("Animation_73axp")
 }
 
+[sub_resource type="Animation" id="Animation_omxsd"]
+resource_name = "game_started"
+length = 20.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GeneralSounds")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("16_k8dpp")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("16_balx4")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("18_mu86q")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("19_j6t78")
+}],
+"times": PackedFloat32Array(1, 3.5, 6, 7.7)
+}
+tracks/0/use_blend = true
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(9.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finish_start_sequence"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cojnx"]
+resource_name = "game_over"
+length = 20.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Lamp")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"off"
+}]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GeneralSounds")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("20_qtixg")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("21_u7f51")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("22_2mvdm")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("23_avyw2")
+}],
+"times": PackedFloat32Array(0, 1.9, 2.5, 3.1)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameOver:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_748oh"]
+_data = {
+"game_over": SubResource("Animation_cojnx"),
+"game_started": SubResource("Animation_omxsd")
+}
+
 [node name="Game" type="Node2D"]
 
-[node name="WaterTimer" type="Timer" parent="."]
-wait_time = 2.0
+[node name="HandOriginalPosition" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(5, -14)
+
+[node name="OvaniPlayer" type="Node" parent="."]
+script = ExtResource("1_ts23s")
+QueuedSongs = Array[ExtResource("5_kvyi6")]([SubResource("Resource_at46k")])
+Volume = -12.0
+
+[node name="DrinkTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [node name="Background" parent="." instance=ExtResource("1_vii0p")]
 position = Vector2(-1, 2)
@@ -96,106 +195,53 @@ position = Vector2(-1, 2)
 [node name="Menu" type="CanvasLayer" parent="."]
 script = ExtResource("2_ipxfd")
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+offset_left = 51.0
+offset_top = 235.0
+offset_right = 517.0
+offset_bottom = 444.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_font_sizes/font_size = 42
-text = "Just Water, Please!"
-uppercase = true
+theme = ExtResource("3_dslcu")
+theme_override_font_sizes/font_size = 82
+text = "Here's your water, sir"
 
-[node name="Play" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Menu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Play" type="Label" parent="Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_font_sizes/font_size = 36
-text = "PLAY"
+theme = ExtResource("3_dslcu")
+theme_override_font_sizes/font_size = 64
+text = "[A] PLAY"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="Quit" type="Label" parent="Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-
-[node name="Label" type="Label" parent="Menu/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 36
-text = "MUSIC"
-
-[node name="Music" type="HSlider" parent="Menu/MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-
-[node name="Label" type="Label" parent="Menu/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 36
-text = "SFX"
-
-[node name="SFX" type="HSlider" parent="Menu/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-
-[node name="Quit" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-theme_override_font_sizes/font_size = 36
-text = "QUIT"
-
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="WaterCounter" type="Label" parent="HUD"]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -290.0
-offset_top = -4.0
-offset_right = -250.0
-offset_bottom = 19.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 42
-text = "0"
-script = ExtResource("2_683tf")
+theme = ExtResource("3_dslcu")
+theme_override_font_sizes/font_size = 64
+text = "[Q] QUIT"
 
 [node name="GameCamera" type="Camera2D" parent="."]
-offset = Vector2(-80.605, 0)
 zoom = Vector2(10, 10)
 script = ExtResource("6_qtihm")
+max_offset = Vector2(25, 15)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="GameCamera"]
-libraries = {
-"": SubResource("AnimationLibrary_nvdvr")
-}
-autoplay = "StartSweep"
+[node name="Hand" parent="." instance=ExtResource("10_y8dhq")]
+position = Vector2(5, -14)
+offset_x_range = 2.0
 
 [node name="Table" parent="." instance=ExtResource("7_8he3r")]
 unique_name_in_owner = true
 position = Vector2(-25, 18)
+
+[node name="Shards" type="Node2D" parent="."]
 
 [node name="Floor" parent="." instance=ExtResource("10_8yy4c")]
 position = Vector2(0, 26)
@@ -204,18 +250,12 @@ position = Vector2(0, 26)
 position = Vector2(-40, 19)
 
 [node name="Player" parent="." instance=ExtResource("5_blry0")]
-position = Vector2(-41, 15)
+position = Vector2(-41, 12)
 
-[node name="Hand" parent="." instance=ExtResource("10_y8dhq")]
-position = Vector2(5, -14)
+[node name="PromptHolder" type="Node2D" parent="."]
+position = Vector2(-34, 2)
 
-[node name="Lamp" parent="." instance=ExtResource("11_g0a4j")]
-position = Vector2(-22, -33)
-
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(-33, -5)
-
-[node name="ComboPrompt" type="Label" parent="Node2D"]
+[node name="ComboPrompt" type="Label" parent="PromptHolder"]
 unique_name_in_owner = true
 anchors_preset = 4
 anchor_top = 0.5
@@ -223,7 +263,8 @@ anchor_bottom = 0.5
 offset_right = 31.0
 offset_bottom = 58.0
 grow_vertical = 2
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.4, 0.4)
+theme = ExtResource("3_dslcu")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -232,19 +273,82 @@ theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 8
 theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 16
-text = "U"
 script = ExtResource("3_kan5k")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/ComboPrompt"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PromptHolder/ComboPrompt"]
 libraries = {
 "": SubResource("AnimationLibrary_0vylt")
 }
 autoplay = "Sway"
 
-[node name="HandOriginalPosition" type="Node2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(5, -14)
+[node name="Lamp" parent="." instance=ExtResource("11_g0a4j")]
+position = Vector2(-22, -33)
 
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="Menu" method="play"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="GameCamera" method="_on_game_start"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Quit" to="Menu" method="quit"]
+[node name="EventManager" type="Node2D" parent="."]
+script = ExtResource("15_0tk5s")
+
+[node name="GameOver" type="CanvasLayer" parent="EventManager"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="EventManager/GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EventManager/GameOver/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -35.5
+offset_right = 132.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="EventManager/GameOver/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_dslcu")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 102
+text = "game over"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="EventManager/GameOver/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="TipLabel" type="Label" parent="EventManager/GameOver/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_dslcu")
+theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
+theme_override_font_sizes/font_size = 102
+text = "each gulp is harder than the last"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="EventManager/GameOver/ColorRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "[A] to retry
+[Q] to quit"
+
+[node name="MonsterFace" type="Sprite2D" parent="EventManager"]
+
+[node name="MonsterFoot" type="Sprite2D" parent="EventManager"]
+
+[node name="GeneralSounds" type="AudioStreamPlayer2D" parent="EventManager"]
+volume_db = 6.0
+pitch_scale = 0.7
+max_polyphony = 8
+bus = &"Player"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EventManager"]
+libraries = {
+"": SubResource("AnimationLibrary_748oh")
+}

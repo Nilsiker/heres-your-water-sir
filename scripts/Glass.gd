@@ -1,51 +1,58 @@
 class_name Glass
 extends RigidBody2D
 
-@export var combination: String
+@export var key: String
 @export var is_water: bool
-@export var amount = 3
+@export var amount = 3.0
 @export var gulp_amount: float
 
-@onready var shatter_particles = preload("res://scenes/shatter_particles.tscn")
+@onready var shatter_particles = preload("res://scenes/particles/shatter_particles.tscn")
+@onready var particles_material = preload("res://scenes/particles/shatter_particles.tres")
 
 func _ready():
-	combination = _get_random_combo()
+	key = _get_random_key()
 	is_water = randf() > 0.5
 	if not is_water:
-		$LiquidSprite.modulate = Color.SADDLE_BROWN
-	gulp_amount = 3.0 / combination.length()
+		var c = Color.YELLOW
+		c.a = 0.5
+		$LiquidSprite.modulate = c
+	gulp_amount = 1
 
-func gulp():
-	combination = combination.substr(1)
-	print($LiquidSprite.region_rect.size.y)
+
+
+func gulp(fullness: float):
+	print("fullness: ", fullness)
+	gulp_amount = pow(1.0,fullness)
+	print("gulp_amount: ", gulp_amount)
+	amount = max(0, amount-gulp_amount)
+	print("new amount: ", amount)
 	if $LiquidSprite.region_rect.size.y:
-		$LiquidSprite.region_rect.size.y -= gulp_amount
+		$LiquidSprite.region_rect.size.y = amount
+	key = _get_random_key() if amount else ""
+
+
+func _get_random_key() -> String:
+	var lower_case = randf() > 0.5
+	if randi() % 2 == 0:
+		if lower_case: return "q"
+		else: return "Q"
+	else:
+		if lower_case: return "a"
+		else: return "A"
+
+
+func shatter():
+	var particles = shatter_particles.instantiate() as GPUParticles2D
+	particles.process_material = particles_material.duplicate(true)
+	get_tree().current_scene.get_node("Shards").add_child(particles)
+	particles.global_position = global_position
 	
-func peek() -> String:
-	return combination[0].to_upper() if not combination.is_empty() else ""
+	var gradient: Gradient = particles.process_material.color_initial_ramp.gradient as Gradient
+	gradient.set_color(0, $LiquidSprite.modulate)
+	gradient.set_offset(1, $LiquidSprite.region_rect.size.y / 6)
 
-
-func _get_random_combo() -> String:
-	var difficulty = 6 # todo
-	var combo = ""
-	for i in difficulty:
-		var lower_case = difficulty / 20.0 > randf()
-		if randi() % 2 == 0:
-			if lower_case: combo += "q"
-			else: combo += "Q"
-		else:
-			if lower_case: combo += "a"
-			else: combo += "A"
-	return combo
-
-func shatter(at_position: Vector2):
-	var particles = shatter_particles.instantiate() as CPUParticles2D
-	get_tree().current_scene.add_child(particles)
-	particles.global_position = at_position
-	particles.color_initial_ramp.set_color(0, $LiquidSprite.modulate)
-	particles.color_initial_ramp.set_offset(1, $LiquidSprite.region_rect.size.y / 6)
 	particles.amount = 10 + 10  *  $LiquidSprite.region_rect.size.y / 3
 	particles.emitting = true
 	particles.finished.connect(particles.queue_free)
-	GameState.shatter_glass(self)
+	GameState.shatter_glass(self.duplicate())
 	queue_free()

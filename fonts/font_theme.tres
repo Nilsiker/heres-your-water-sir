@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://61ii6arynmf1"]
+
+[ext_resource type="FontFile" uid="uid://17ibskl03onc" path="res://fonts/CreeperPixelRegular-DMYx.ttf" id="1_u7ck1"]
+
+[resource]
+default_font = ExtResource("1_u7ck1")

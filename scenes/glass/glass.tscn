@@ -72,5 +72,3 @@ metadata/_aseprite_wizard_interface_config_ = {
 "output_section": true,
 "slice_section": true
 }
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
