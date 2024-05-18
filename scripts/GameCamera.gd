@@ -12,7 +12,7 @@ var _trauma_power = 3  # Trauma exponent. Use [2, 3].
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	GameState.gulp_failed.connect(_on_gulp_failed)
+	GameState.choked.connect(_on_gulp_failed)
 	
 func _on_gulp_failed():
 	#_trauma = min(_trauma + 0.4, 1.0)

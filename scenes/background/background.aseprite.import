@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="AtlasTexture"
+uid="uid://b8j0wdt4uburm"
+path="res://.godot/imported/background.aseprite-e84ff1bc7f29578a47e8a41869e2ac4c.res"
+
+[deps]
+
+source_file="res://scenes/background/background.aseprite"
+dest_files=["res://.godot/imported/background.aseprite-e84ff1bc7f29578a47e8a41869e2ac4c.res"]
+
+[params]
+
+exclude_layers_pattern=""
+only_visible_layers=false

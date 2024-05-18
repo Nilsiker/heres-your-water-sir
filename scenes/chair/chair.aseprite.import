@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dgo1eeygd4176"
+path="res://.godot/imported/chair.aseprite-12bb753409f1f4c45e2a086d1d3d199f.res"
+
+[deps]
+
+source_file="res://scenes/chair/chair.aseprite"
+dest_files=["res://.godot/imported/chair.aseprite-12bb753409f1f4c45e2a086d1d3d199f.res"]
+
+[params]
+

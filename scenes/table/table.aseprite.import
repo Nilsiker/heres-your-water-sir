@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://sf6ecc8o2n3n"
+path="res://.godot/imported/table.aseprite-daf8ecd4eafb248075a37f020c8d4adc.res"
+
+[deps]
+
+source_file="res://scenes/table/table.aseprite"
+dest_files=["res://.godot/imported/table.aseprite-daf8ecd4eafb248075a37f020c8d4adc.res"]
+
+[params]
+

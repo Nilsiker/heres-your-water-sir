@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://vs2qgw1p4rfk"]
+
+[sub_resource type="Gradient" id="Gradient_j28wh"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_cm8c8"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.530864)
+colors = PackedColorArray(0.369183, 0.575015, 1, 1, 0.830335, 0.830335, 0.830335, 1)
+
+[node name="ShatterParticles" type="CPUParticles2D"]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, -1)
+spread = 54.54
+gravity = Vector2(0, 200)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+angular_velocity_max = 720.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_j28wh")
+color_initial_ramp = SubResource("Gradient_cm8c8")

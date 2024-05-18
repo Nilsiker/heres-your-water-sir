@@ -1,27 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7kbgteggdhyc"]
+[gd_scene load_steps=19 format=3 uid="uid://c7kbgteggdhyc"]
 
+[ext_resource type="PackedScene" uid="uid://cixlvycbpq6tp" path="res://scenes/background/background.tscn" id="1_vii0p"]
 [ext_resource type="Script" path="res://scripts/WaterCounter.gd" id="2_683tf"]
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="2_ipxfd"]
 [ext_resource type="Script" path="res://scripts/ComboPrompt.gd" id="3_kan5k"]
-[ext_resource type="Texture2D" uid="uid://dsfu5v1pkt422" path="res://icon.svg" id="4_5atbi"]
-[ext_resource type="Script" path="res://scripts/Player.gd" id="5_pcfg7"]
+[ext_resource type="PackedScene" uid="uid://w1c5oxilg2qv" path="res://scenes/player/player.tscn" id="5_blry0"]
 [ext_resource type="Script" path="res://scripts/GameCamera.gd" id="6_qtihm"]
-[ext_resource type="Script" path="res://scripts/Table.gd" id="7_heare"]
-
-[sub_resource type="Animation" id="Animation_bdxeq"]
-resource_name = "StartSweep"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(-2.5, 1),
-"update": 0,
-"values": [Vector2(-80, 0), Vector2(0, 0)]
-}
+[ext_resource type="PackedScene" uid="uid://cm76qk02n1vyn" path="res://scenes/table/table.tscn" id="7_8he3r"]
+[ext_resource type="Script" path="res://scripts/Arm.gd" id="8_bc0oy"]
+[ext_resource type="PackedScene" uid="uid://c1tm30shsujbh" path="res://scenes/background/floor.tscn" id="10_8yy4c"]
+[ext_resource type="PackedScene" uid="uid://dnh8ekq3l7hyb" path="res://scenes/chair/chair.tscn" id="11_0xr2v"]
+[ext_resource type="Texture2D" uid="uid://g86xrvrlega3" path="res://scenes/chair.png" id="11_7ty7v"]
+[ext_resource type="PackedScene" uid="uid://c3o63a1cwy26t" path="res://scenes/lamp/lamp.tscn" id="11_g0a4j"]
 
 [sub_resource type="Animation" id="Animation_qbgsv"]
 length = 0.001
@@ -38,30 +28,70 @@ tracks/0/keys = {
 "values": [Vector2(-80.605, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_bdxeq"]
+resource_name = "StartSweep"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2.5, 1),
+"update": 0,
+"values": [Vector2(-80, 0), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nvdvr"]
 _data = {
 "RESET": SubResource("Animation_qbgsv"),
 "StartSweep": SubResource("Animation_bdxeq")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5i05a"]
-size = Vector2(122.269, 71.1343)
+[sub_resource type="Animation" id="Animation_rnbi0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
-[sub_resource type="Gradient" id="Gradient_kvee2"]
-offsets = PackedFloat32Array(0, 0.590909, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.92298, 0.92298, 0.92298, 1, 0.152778, 0.152778, 0.152778, 1)
+[sub_resource type="Animation" id="Animation_73axp"]
+resource_name = "Sway"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.784582, 2),
+"update": 0,
+"values": [Vector2(0, 5), Vector2(0, 0)]
+}
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_pblsi"]
-gradient = SubResource("Gradient_kvee2")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.7, 0.9)
-metadata/_snap_enabled = true
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0vylt"]
+_data = {
+"RESET": SubResource("Animation_rnbi0"),
+"Sway": SubResource("Animation_73axp")
+}
 
 [node name="Game" type="Node2D"]
 
-[node name="Darkness" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)
+[node name="WaterTimer" type="Timer" parent="."]
+
+[node name="Background" parent="." instance=ExtResource("1_vii0p")]
+position = Vector2(-1, 2)
 
 [node name="Menu" type="CanvasLayer" parent="."]
 script = ExtResource("2_ipxfd")
@@ -152,72 +182,67 @@ theme_override_font_sizes/font_size = 42
 text = "0"
 script = ExtResource("2_683tf")
 
-[node name="ComboPrompt" type="Label" parent="HUD"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -143.0
-offset_right = 19.0
-offset_bottom = -103.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 42
-script = ExtResource("3_kan5k")
-
-[node name="WaterTimer" type="Timer" parent="."]
-wait_time = 3.0
-
-[node name="Background" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(22, -13)
-scale = Vector2(7.40625, 3.34375)
-texture = ExtResource("4_5atbi")
-
-[node name="Player" type="Sprite2D" parent="."]
-position = Vector2(-74, 3)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_5atbi")
-script = ExtResource("5_pcfg7")
-
-[node name="CoughTimer" type="Timer" parent="Player"]
-one_shot = true
-
 [node name="GameCamera" type="Camera2D" parent="."]
 offset = Vector2(-80.605, 0)
-zoom = Vector2(5, 5)
+zoom = Vector2(10, 10)
 script = ExtResource("6_qtihm")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameCamera"]
 libraries = {
 "": SubResource("AnimationLibrary_nvdvr")
 }
+autoplay = "StartSweep"
 
-[node name="Table" type="Sprite2D" parent="."]
-position = Vector2(-14, 46)
-scale = Vector2(0.523438, 0.523438)
-texture = ExtResource("4_5atbi")
-script = ExtResource("7_heare")
-offset_x_range = 20.0
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Table"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/StaticBody2D"]
-position = Vector2(-3.8147e-06, -25.5672)
-shape = SubResource("RectangleShape2D_5i05a")
-
-[node name="Placement" type="Node2D" parent="Table"]
-position = Vector2(-3.64389e-06, -154.746)
+[node name="Table" parent="." instance=ExtResource("7_8he3r")]
+unique_name_in_owner = true
+position = Vector2(-25, 18)
+offset_x_range = 1.0
 
 [node name="Arm" type="Sprite2D" parent="."]
+script = ExtResource("8_bc0oy")
 
-[node name="Lamp" type="PointLight2D" parent="."]
-position = Vector2(-4.76837e-07, -49)
-scale = Vector2(3.9375, 3.9375)
-texture = SubResource("GradientTexture2D_pblsi")
+[node name="Floor" parent="." instance=ExtResource("10_8yy4c")]
+position = Vector2(0, 26)
+
+[node name="Chair" parent="." instance=ExtResource("11_0xr2v")]
+position = Vector2(-40, 19)
+texture = ExtResource("11_7ty7v")
+
+[node name="Player" parent="." instance=ExtResource("5_blry0")]
+position = Vector2(-41, 15)
+
+[node name="Lamp" parent="." instance=ExtResource("11_g0a4j")]
+visible = false
+position = Vector2(-22, -33)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-33, -5)
+
+[node name="ComboPrompt" type="Label" parent="Node2D"]
+unique_name_in_owner = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_right = 31.0
+offset_bottom = 58.0
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = "U"
+script = ExtResource("3_kan5k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/ComboPrompt"]
+libraries = {
+"": SubResource("AnimationLibrary_0vylt")
+}
+autoplay = "Sway"
 
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="Menu" method="play"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="GameCamera" method="_on_game_start"]

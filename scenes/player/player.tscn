@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://w1c5oxilg2qv"]
+
+[ext_resource type="Texture2D" uid="uid://ckdk8jqs5uarl" path="res://scenes/player/sit_player_debug.png" id="1_7o2nx"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_ksbcf"]
+
+[node name="Player" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_7o2nx")
+script = ExtResource("2_ksbcf")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://scenes/player/sit_player_debug.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "7bc36affb888282ecfb412e1b4356bc1"
+
+[node name="CoughTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GlassPosition" type="Node2D" parent="."]
+position = Vector2(4.355, 0.41)

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cixlvycbpq6tp"]
+
+[ext_resource type="Texture2D" uid="uid://dpjmlnda1tpdp" path="res://scenes/background/background.png" id="1_kmbm4"]
+
+[node name="Background" type="Sprite2D"]
+texture = ExtResource("1_kmbm4")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://scenes/background/background.aseprite"
+}

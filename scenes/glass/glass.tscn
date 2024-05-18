@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://3ipp3hwe2s6g"]
+
+[ext_resource type="Script" path="res://scripts/Glass.gd" id="1_6and7"]
+[ext_resource type="Texture2D" uid="uid://ce0kadxkxb4k1" path="res://scenes/glass/Glass.png" id="2_tsv70"]
+[ext_resource type="Texture2D" uid="uid://jy5d5v0ikjqq" path="res://scenes/glass/Liquid.png" id="3_flhyl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esi4o"]
+size = Vector2(4, 4)
+
+[node name="Glass" type="RigidBody2D"]
+script = ExtResource("1_6and7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_esi4o")
+
+[node name="GlassSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_tsv70")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "Glass",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://scenes/glass/glass.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "8bba658d0d3e0af0dd336d9cc43bfe5c"
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"output_section": true,
+"slice_section": true
+}
+
+[node name="LiquidSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_flhyl")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "Liquid",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://scenes/glass/glass.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "8bba658d0d3e0af0dd336d9cc43bfe5c"
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"output_section": true,
+"slice_section": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

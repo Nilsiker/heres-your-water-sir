@@ -19,6 +19,14 @@ config/icon="res://icon.svg"
 
 GameState="*res://scripts/GameState.gd"
 
+[dotnet]
+
+project/assembly_name="just-water-please"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+
 [input]
 
 Q={
@@ -39,5 +47,6 @@ U={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

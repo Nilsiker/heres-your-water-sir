@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://o1so4oi1ytib"
+path="res://.godot/imported/demo_scene.aseprite-379016f5f39846e4821adae0333110f0.res"
+
+[deps]
+
+source_file="res://demo_scene.aseprite"
+dest_files=["res://.godot/imported/demo_scene.aseprite-379016f5f39846e4821adae0333110f0.res"]
+
+[params]
+

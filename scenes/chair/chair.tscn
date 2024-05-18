@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnh8ekq3l7hyb"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6vfur"]
+load_path = "res://.godot/imported/chair.png-b066047e8112a7020cb40c519d5ffc30.ctex"
+
+[node name="Chair" type="Sprite2D"]
+texture_filter = 1
+position = Vector2(-43, 21)
+texture = SubResource("CompressedTexture2D_6vfur")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://scenes/chair/chair.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "1b4de3ed1d30289fa356143a75135cee"

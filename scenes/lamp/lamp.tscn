@@ -1,0 +1,163 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3o63a1cwy26t"]
+
+[ext_resource type="Texture2D" uid="uid://d3r0iprihmm1k" path="res://scenes/lamp/lamp.png" id="1_rtv2m"]
+
+[sub_resource type="Animation" id="Animation_tn73o"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_q1xhg"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ars05"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_42wce"]
+_data = {
+"Lit": SubResource("Animation_q1xhg"),
+"Unlit": SubResource("Animation_ars05"),
+"default": SubResource("Animation_tn73o")
+}
+
+[sub_resource type="Animation" id="Animation_kpox8"]
+resource_name = "sway"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 4.5),
+"transitions": PackedFloat32Array(1, -2, -2),
+"update": 0,
+"values": [0.0, -0.0174533, 0.0174533]
+}
+
+[sub_resource type="Animation" id="Animation_kgt6w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ott65"]
+_data = {
+"RESET": SubResource("Animation_kgt6w"),
+"sway": SubResource("Animation_kpox8")
+}
+
+[node name="Lamp" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_rtv2m")
+offset = Vector2(18.465, 34.38)
+hframes = 2
+frame = 1
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 0,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://scenes/lamp/lamp.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "ad9c44e385f195346c85ab971472d79c"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_42wce")
+}
+
+[node name="Sway" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ott65")
+}
+autoplay = "sway"
