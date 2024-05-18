@@ -3,10 +3,10 @@ extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GameState.glass_held.connect(set_combo_label)
-	GameState.glass_dropped.connect(_on_glass_dropped)
-	GameState.gulped.connect(set_combo_label)
-	GameState.choked.connect(_on_disable)
+	DrinkChannel.held.connect(set_combo_label)
+	DrinkChannel.dropped.connect(_on_glass_dropped)
+	DrinkChannel.gulped.connect(set_combo_label)
+	DrinkChannel.choked.connect(_on_disable)
 	GameState.recovered.connect(_on_enable)
 
 var modulate_tween: Tween

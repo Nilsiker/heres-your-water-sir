@@ -25,4 +25,4 @@ randomness = 0.26
 stream = SubResource("AudioStreamRandomizer_8dhax")
 pitch_scale = 1.7
 autoplay = true
-bus = &"Distortion"
+bus = &"Player"

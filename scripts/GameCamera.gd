@@ -7,20 +7,25 @@ extends Camera2D
 
 var _trauma = 0.0 # Current shake strength.
 var _trauma_power = 3 # Trauma exponent. Use [2, 3].
+var _rumbling: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	GameState.monster_roared.connect(_on_monster_roared)
+	MonsterChannel.roared.connect(_on_monster_roared)
+	MonsterChannel.rumbling_updated.connect(_on_monster_rumble_updated)
 	
-func _on_monster_roared(intensity):
+func _on_monster_rumble_updated(intensity):
+	_rumbling = intensity
+
+func _on_monster_roared():
 	#_trauma = min(_trauma + 0.4, 1.0)
-	_trauma = min(intensity, 0.5)
+	_trauma = min(GameState.upset_amount, 0.5)
 
 func _process(delta):
 	if _trauma > 0:
 		var decay_rate = 0.5 / decay_time
-		_trauma = max(_trauma - decay_rate * delta, 0)
+		_trauma = max(_trauma - decay_rate * delta, _rumbling)
 		shake()
 		
 func shake():

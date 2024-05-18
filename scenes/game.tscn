@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c7kbgteggdhyc"]
+[gd_scene load_steps=35 format=3 uid="uid://c7kbgteggdhyc"]
 
 [ext_resource type="Script" path="res://Godot Plugin 1.3/OvaniPlayer.gd" id="1_ts23s"]
 [ext_resource type="PackedScene" uid="uid://cixlvycbpq6tp" path="res://scenes/background/background.tscn" id="1_vii0p"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bbtytopqlgrqn" path="res://audio/Horror Suspense 2/Atmospheres And Loops/Crumbling Building Loop.wav" id="2_r0scf"]
 [ext_resource type="Theme" uid="uid://61ii6arynmf1" path="res://fonts/font_theme.tres" id="3_dslcu"]
 [ext_resource type="Script" path="res://scripts/ComboPrompt.gd" id="3_kan5k"]
+[ext_resource type="Script" path="res://scripts/DrinkTimer.gd" id="4_2c6mi"]
 [ext_resource type="PackedScene" uid="uid://w1c5oxilg2qv" path="res://scenes/player/player.tscn" id="5_blry0"]
 [ext_resource type="Script" path="res://Godot Plugin 1.3/OvaniSong.gd" id="5_kvyi6"]
 [ext_resource type="Script" path="res://scripts/GameCamera.gd" id="6_qtihm"]
@@ -23,12 +24,21 @@
 [ext_resource type="AudioStream" uid="uid://cccbx57jhqwli" path="res://audio/Horror Suspense 2/Impacts And Swooshes/Misc/Void Scream 002.wav" id="21_u7f51"]
 [ext_resource type="AudioStream" uid="uid://dfiqfcrksn234" path="res://audio/Hollywood Action 2/Environment/Doors/Metal Door Open 003.wav" id="22_2mvdm"]
 [ext_resource type="AudioStream" uid="uid://c0i0ggp72tlyj" path="res://audio/Horror Suspense 2/Voice/Realistic/Horror Scream Male 001.wav" id="23_avyw2"]
+[ext_resource type="Script" path="res://scripts/DebugWaterFinished.gd" id="25_rba4k"]
 
 [sub_resource type="Resource" id="Resource_at46k"]
 script = ExtResource("5_kvyi6")
 Loop60 = ExtResource("2_r0scf")
 ReverbTail = 2.0
 SongMode = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6hqj"]
+bg_color = Color(0.172833, 0.172833, 0.172833, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lchr"]
+bg_color = Color(1, 1, 1, 1)
+corner_detail = 1
 
 [sub_resource type="Animation" id="Animation_rnbi0"]
 length = 0.001
@@ -187,46 +197,128 @@ QueuedSongs = Array[ExtResource("5_kvyi6")]([SubResource("Resource_at46k")])
 Volume = -12.0
 
 [node name="DrinkTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 8.0
+script = ExtResource("4_2c6mi")
+
+[node name="WaterDebug" type="Label" parent="."]
+top_level = true
+offset_left = 15.0
+offset_top = -36.0
+offset_right = 55.0
+offset_bottom = -13.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "0"
+horizontal_alignment = 2
+script = ExtResource("25_rba4k")
 
 [node name="Background" parent="." instance=ExtResource("1_vii0p")]
 position = Vector2(-1, 2)
 
-[node name="Menu" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_ipxfd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
-offset_left = 51.0
-offset_top = 235.0
-offset_right = 517.0
-offset_bottom = 444.0
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme_override_constants/separation = 20
+[node name="Margins" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
 
-[node name="Label" type="Label" parent="Menu/VBoxContainer"]
+[node name="Quitting" type="HBoxContainer" parent="UI/Margins"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="UI/Margins/Quitting"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("3_dslcu")
+theme_override_font_sizes/font_size = 64
+text = "quitting"
+vertical_alignment = 1
+
+[node name="Progress" type="ProgressBar" parent="UI/Margins/Quitting"]
+custom_minimum_size = Vector2(120, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_a6hqj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8lchr")
+max_value = 1.0
+show_percentage = false
+
+[node name="Menu" type="HBoxContainer" parent="UI/Margins"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="UI/Margins/Menu"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/Margins/Menu/Options"]
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("3_dslcu")
 theme_override_font_sizes/font_size = 82
-text = "Here's your water, sir"
+text = "here's your water, sir"
 
-[node name="HSeparator" type="HSeparator" parent="Menu/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/Margins/Menu/Options"]
 layout_mode = 2
 
-[node name="Play" type="Label" parent="Menu/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-theme = ExtResource("3_dslcu")
-theme_override_font_sizes/font_size = 64
-text = "[A] PLAY"
-
-[node name="Quit" type="Label" parent="Menu/VBoxContainer"]
+[node name="Play" type="Label" parent="UI/Margins/Menu/Options"]
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("3_dslcu")
 theme_override_font_sizes/font_size = 64
-text = "[Q] QUIT"
+text = "[A] play"
+
+[node name="Quit" type="Label" parent="UI/Margins/Menu/Options"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("3_dslcu")
+theme_override_font_sizes/font_size = 64
+text = "[Q] quit"
+
+[node name="Help" type="VBoxContainer" parent="UI/Margins/Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Title" type="Label" parent="UI/Margins/Menu/Help"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("3_dslcu")
+theme_override_colors/font_color = Color(0.641934, 0.641934, 0.641934, 1)
+theme_override_font_sizes/font_size = 64
+text = "How to play"
+horizontal_alignment = 1
+
+[node name="Controls" type="Label" parent="UI/Margins/Menu/Help"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("3_dslcu")
+theme_override_colors/font_color = Color(0.641934, 0.641934, 0.641934, 1)
+theme_override_font_sizes/font_size = 42
+text = "
+[U] to pick up or drop glass
+
+[Q] or  [A] to drink
+
+Do not upset him"
+horizontal_alignment = 1
 
 [node name="GameCamera" type="Camera2D" parent="."]
 zoom = Vector2(10, 10)
@@ -282,6 +374,7 @@ libraries = {
 autoplay = "Sway"
 
 [node name="Lamp" parent="." instance=ExtResource("11_g0a4j")]
+modulate = Color(0.637843, 0.637843, 0.637843, 1)
 position = Vector2(-22, -33)
 
 [node name="EventManager" type="Node2D" parent="."]
@@ -328,15 +421,26 @@ layout_mode = 2
 theme = ExtResource("3_dslcu")
 theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
 theme_override_font_sizes/font_size = 102
-text = "each gulp is harder than the last"
+text = "don't forget to hydrate"
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="EventManager/GameOver/ColorRect"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "[A] to retry
-[Q] to quit"
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -257.0
+offset_top = -114.0
+offset_right = 259.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_dslcu")
+theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
+theme_override_font_sizes/font_size = 64
+text = "press any key to return to menu"
 
 [node name="MonsterFace" type="Sprite2D" parent="EventManager"]
 

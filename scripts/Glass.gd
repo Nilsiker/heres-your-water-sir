@@ -20,19 +20,15 @@ func _ready():
 
 
 
-func gulp(fullness: float):
-	print("fullness: ", fullness)
-	gulp_amount = pow(1.0,fullness)
-	print("gulp_amount: ", gulp_amount)
+func gulp():
 	amount = max(0, amount-gulp_amount)
-	print("new amount: ", amount)
 	if $LiquidSprite.region_rect.size.y:
 		$LiquidSprite.region_rect.size.y = amount
 	key = _get_random_key() if amount else ""
 
 
 func _get_random_key() -> String:
-	var lower_case = randf() > 0.5
+	var lower_case = GameState.glass_drunk > 5 and randf() > 0.5
 	if randi() % 2 == 0:
 		if lower_case: return "q"
 		else: return "Q"
@@ -54,5 +50,5 @@ func shatter():
 	particles.amount = 10 + 10  *  $LiquidSprite.region_rect.size.y / 3
 	particles.emitting = true
 	particles.finished.connect(particles.queue_free)
-	GameState.shatter_glass(self.duplicate())
+	DrinkChannel.shatter(self)
 	queue_free()

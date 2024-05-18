@@ -12,6 +12,8 @@ post_gain = -12.0
 
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_b2sqo"]
 resource_name = "LowPassFilter"
+cutoff_hz = 1000.0
+db = 1
 
 [resource]
 bus/1/name = &"Player"
@@ -31,4 +33,4 @@ bus/2/send = &"Master"
 bus/2/effect/0/effect = SubResource("AudioEffectDistortion_tjc4v")
 bus/2/effect/0/enabled = true
 bus/2/effect/1/effect = SubResource("AudioEffectLowPassFilter_b2sqo")
-bus/2/effect/1/enabled = false
+bus/2/effect/1/enabled = true

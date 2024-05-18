@@ -1,14 +1,18 @@
 extends Sprite2D
 
-var holding: Glass = null
-var fullness = 1.0
+var holding: Glass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$CoughTimer.timeout.connect(_on_choke_ended)
-	GameState.choked.connect(_on_choke)
+	holding = null
+	DrinkChannel.choked.connect(_on_choke)
+	MonsterChannel.roared.connect(_on_monster_roared)
 
+	$CoughTimer.timeout.connect(_on_choke_ended)
 	$AnimationPlayer.animation_finished.connect(func(_anim): $AnimationPlayer.play("Sit"))
+
+func _on_monster_roared():
+	$AnimationPlayer.speed_scale = 1 + GameState.upset_amount
 
 func _on_choke():
 	$CoughTimer.start()
@@ -20,13 +24,13 @@ func _gulp():
 		$AnimationPlayer.play("Drink")
 	
 func _on_anim_gulp():
-	holding.gulp(fullness)
-	fullness += 0.1
-	GameState.gulp(holding)
+	holding.gulp()
+	DrinkChannel.gulp(holding)
+	if not holding.is_water: MonsterChannel.roar()
 	if holding.amount:
 		$GulpAudio.play()
 	else:
-		GameState.increment_score()
+		if holding.is_water: GameState.increment_score()
 		$FinishedAudio.play()
 
 func _on_anim_gulp_finished():
@@ -43,7 +47,7 @@ func _unhandled_input(event):
 	var glass = %Table.get_next_glass() as Glass
 	if event.is_action_pressed("U"):
 		if holding:
-			GameState.drop_glass(holding)
+			DrinkChannel.drop(holding)
 			$AnimationPlayer.play("Sit")
 			holding.freeze = false
 			holding = null
@@ -51,7 +55,7 @@ func _unhandled_input(event):
 
 		if glass:
 			holding = glass
-			GameState.hold_glass(glass)
+			DrinkChannel.hold(glass)
 			glass.reparent($GlassPosition)
 			glass.position = Vector2.ZERO
 			glass.freeze = true
@@ -60,10 +64,10 @@ func _unhandled_input(event):
 		if holding and holding.key.to_upper() == "Q":
 			_gulp()
 		else:
-			GameState.choke(holding)
+			DrinkChannel.choke()
 
 	elif event.is_action_pressed("A"):
 		if holding and holding.key.to_upper() == "A":
 			_gulp()
 		else:
-			GameState.choke(holding)
+			DrinkChannel.choke()

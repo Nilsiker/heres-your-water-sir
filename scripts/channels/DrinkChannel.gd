@@ -1,38 +1,41 @@
 extends Node
 
-signal spawned(glass:Glass)
-signal held(glass:Glass)
-signal gulped(glass:Glass)
+signal spawned(glass: Glass)
+signal held(glass: Glass)
+signal gulped(glass: Glass)
 signal choked
-signal dropped
-signal shattered
+signal dropped(glass: Glass)
+signal shattered(glass: Glass)
 
 func _ready():
-	%DrinkTimer.timeout.connect(spawn)
+	GameState.game_started.connect(_on_game_started)
 
-func gulp():
-	gulped.emit()
+func _on_game_started():
+	timer().timeout.connect(spawn)
+	timer().start()
+
+func gulp(glass: Glass):
+	gulped.emit(glass)
 
 func spawn():
+	print("DrinkChannel spawn")
 	GameState.glass_count += 1
 	spawned.emit()
 
-func drop():
-	dropped.emit()
+func drop(glass: Glass):
+	dropped.emit(glass)
 
-func shatter():
-	shattered.emit()
+func shatter(glass: Glass):
+	GameState.glass_count -= 1
+	timer().wait_time =  max(0.5, timer().wait_time - 0.2)
+	shattered.emit(glass)
 	
-func hold_glass(glass: Glass):
+func hold(glass: Glass):
 	if not GameState.glass_count: return
 	held.emit(glass)
-
-func drop_glass(glass: Glass):
-	dropped.emit(glass)
 
 func choke():
 	choked.emit()
 
-func shatter_glass(glass: Glass):
-	GameState.glass_count -= 1
-	shattered.emit(glass)
+func timer() -> Timer:
+	return get_tree().current_scene.get_node("DrinkTimer")

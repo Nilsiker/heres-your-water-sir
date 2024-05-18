@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameState="*res://scripts/GameState.gd"
+DrinkChannel="*res://scripts/channels/DrinkChannel.gd"
+MonsterChannel="*res://scripts/channels/MonsterChannel.gd"
 
 [display]
 
