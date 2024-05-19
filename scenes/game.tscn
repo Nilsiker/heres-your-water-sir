@@ -108,9 +108,12 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(11.9),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(4.1, 11.9),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"shatter_all"
+}, {
 "args": [],
 "method": &"finish_free_player_sequence"
 }]
@@ -403,6 +406,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
 text = "quit"
 
 [node name="Help" type="VBoxContainer" parent="UI/Margins/Menu"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4

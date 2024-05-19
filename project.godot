@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Here's your water, sir!"
+config/name="Here's your water, sir"
 config/description="A game about staying hydrated and appeasing a cryptid."
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")

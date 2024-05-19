@@ -30,7 +30,7 @@ func drop(glass: Glass):
 
 func shatter(glass: Glass):
 	GameState.glass_count -= 1
-	timer().wait_time =  max(0.5, timer().wait_time - 0.2)
+	timer().wait_time =  max(0.8, timer().wait_time - 0.2)
 	shattered.emit(glass)
 	
 func hold(glass: Glass):

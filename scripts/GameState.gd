@@ -49,6 +49,11 @@ var WATERS_DRUNK_TO_WIN:
 func start_sequence():
 	GameState.state = State.InSequence
 	start_sequence_started.emit()
+	allow_non_waters = false
+	allow_lamp_flickering = false
+	allow_lowercase = false
+	allow_sloppy_monster = false
+
 
 func start_free_player_sequence():
 	GameState.state = State.InSequence
@@ -96,6 +101,8 @@ func _game_over():
 	GameState.state = State.GameOver
 
 func _input(_event):
+	if not OS.is_debug_build(): return
+
 	if Input.is_key_pressed(KEY_G):
 		_game_over()
 	if Input.is_key_pressed(KEY_F):

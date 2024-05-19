@@ -93,7 +93,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://scenes/flashlight/flashlight.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "9998fb2406870f258ea36f4030438794"
+metadata/_aseprite_wizard_source_file_hash_ = "d17ff77a2269f9d35e7781d46820402b"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
