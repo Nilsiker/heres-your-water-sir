@@ -3,6 +3,7 @@ extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	DrinkChannel.spawned.connect(_on_spawned)
 	DrinkChannel.held.connect(set_combo_label)
 	DrinkChannel.dropped.connect(_on_glass_dropped)
 	DrinkChannel.gulped.connect(set_combo_label)
@@ -14,6 +15,13 @@ func _ready():
 var modulate_tween: Tween
 var shadow_tween: Tween
 
+func _on_spawned():
+	if GameState.waters_drunk == 0:
+		get_tree().create_timer(4.0).timeout.connect(func(): 
+			if text.is_empty():
+				text = "U"
+				modulate.a = 0.5
+		)
 
 func _on_glass_dropped(_glass: Glass):
 	text = ""
@@ -23,6 +31,8 @@ func set_combo_label(glass: Glass):
 	if glass.key:
 		text = glass.key
 	else: text = ""
+
+	modulate.a = 1
 
 	if modulate_tween: modulate_tween.kill()
 	if shadow_tween: shadow_tween.kill()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://c7kbgteggdhyc"]
+[gd_scene load_steps=54 format=3 uid="uid://c7kbgteggdhyc"]
 
 [ext_resource type="Script" path="res://Godot Plugin 1.3/OvaniPlayer.gd" id="1_ts23s"]
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="2_ipxfd"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/ComboPrompt.gd" id="3_kan5k"]
 [ext_resource type="PackedScene" uid="uid://bwjrwse08a0fp" path="res://scenes/credits.tscn" id="3_on1cg"]
 [ext_resource type="Script" path="res://scripts/DrinkTimer.gd" id="4_2c6mi"]
+[ext_resource type="Script" path="res://scripts/PlayButton.gd" id="4_s4x0n"]
 [ext_resource type="PackedScene" uid="uid://w1c5oxilg2qv" path="res://scenes/player/player.tscn" id="5_blry0"]
 [ext_resource type="Script" path="res://Godot Plugin 1.3/OvaniSong.gd" id="5_kvyi6"]
 [ext_resource type="Script" path="res://scripts/GameCamera.gd" id="6_qtihm"]
@@ -379,16 +380,21 @@ custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+focus_neighbor_right = NodePath("../Help")
+focus_neighbor_bottom = NodePath("../Quit")
 theme = ExtResource("3_dslcu")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
 text = "play"
+script = ExtResource("4_s4x0n")
 
 [node name="Help" type="Button" parent="UI/Margins/Menu/Options/GridContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+focus_neighbor_left = NodePath("../Play")
+focus_neighbor_bottom = NodePath("../Credits")
 theme = ExtResource("3_dslcu")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
@@ -399,6 +405,8 @@ custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+focus_neighbor_top = NodePath("../Play")
+focus_neighbor_right = NodePath("../Credits")
 theme = ExtResource("3_dslcu")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
@@ -409,6 +417,8 @@ custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+focus_neighbor_left = NodePath("../Quit")
+focus_neighbor_top = NodePath("../Help")
 theme = ExtResource("3_dslcu")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
@@ -693,7 +703,7 @@ shape = SubResource("RectangleShape2D_kcafu")
 [node name="PromptHolder" type="Node2D" parent="."]
 top_level = true
 z_index = 20
-position = Vector2(-44, -4)
+position = Vector2(-42, -4)
 
 [node name="ComboPrompt" type="Label" parent="PromptHolder"]
 unique_name_in_owner = true
