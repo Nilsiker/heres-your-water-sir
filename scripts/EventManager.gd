@@ -26,6 +26,7 @@ func _on_game_over():
 
 func _on_game_finished_sequence_started():
 	$FinishScreen.visible = true
+	$FinishScreen._on_visible()
 	$FinishAudio.play()
 
 
@@ -38,3 +39,6 @@ func _input(event):
 
 func _on_player_freed():
 	get_tree().current_scene.get_node("Flashlight").on()
+
+func shatter_all():
+	GameState.all_shattered.emit()

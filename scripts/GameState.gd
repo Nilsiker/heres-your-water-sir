@@ -13,6 +13,7 @@ signal glass_spawned
 signal glass_held(glass: Glass)
 signal glass_dropped(glass: Glass)
 signal glass_shattered(glass: Glass)
+signal all_shattered
 
 signal water_drunk_updated(count: int)
 
@@ -103,3 +104,4 @@ func _input(_event):
 func free_player():
 	player_freed.emit()
 	state = State.Free
+

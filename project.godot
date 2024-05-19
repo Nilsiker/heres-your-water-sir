@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="just-water-please"
+config/name="Here's your water, sir!"
+config/description="A game about staying hydrated and appeasing a cryptid."
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -23,6 +24,8 @@ MonsterChannel="*res://scripts/channels/MonsterChannel.gd"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="viewport"
 
 [dotnet]

@@ -1,0 +1,102 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwjrwse08a0fp"]
+
+[ext_resource type="Theme" uid="uid://c3hd6r6t1gw7u" path="res://fonts/credits_theme.tres" id="1_8kwd8"]
+[ext_resource type="Texture2D" uid="uid://dsfu5v1pkt422" path="res://icon.svg" id="2_5k3h5"]
+[ext_resource type="Texture2D" uid="uid://dx86iu1uot6h1" path="res://nilsikersq.png" id="3_mghpw"]
+
+[node name="Credits" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_8kwd8")
+theme_override_colors/font_color = Color(0.787759, 0.787759, 0.787759, 1)
+theme_override_constants/line_spacing = 16
+theme_override_font_sizes/font_size = 32
+text = "CREDITS
+
+"
+horizontal_alignment = 1
+
+[node name="Content" type="Label" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_8kwd8")
+theme_override_colors/font_color = Color(0.787759, 0.787759, 0.787759, 1)
+theme_override_constants/line_spacing = 16
+theme_override_font_sizes/font_size = 16
+text = "Created for the Pixel Game Jam 2024 using Godot
+
+"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_5k3h5")
+stretch_mode = 3
+
+[node name="Content2" type="Label" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_8kwd8")
+theme_override_colors/font_color = Color(0.787759, 0.787759, 0.787759, 1)
+theme_override_constants/line_spacing = 16
+theme_override_font_sizes/font_size = 16
+text = "
+GAME DESIGN
+Andreas Nilsson
+
+PROGRAMMING
+Andreas Nilsson
+
+PIXEL ART
+Andreas Nilsson
+
+DRINKING AND COUGHING SFX
+Andreas Nilsson
+
+
+ASSETS USED
+Horror Suspense 2 (OvaniSound)
+Hollywood Action 2 (OvaniSound)
+Creeper Pixel Font (Sparkletastic)
+Press Start 2P (CodeMan38)
+
+
+SOCIALS
+nilsiker.itch.io
+x.com/nilsiker
+github.com/nilsiker"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Content3" type="Label" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_8kwd8")
+theme_override_colors/font_color = Color(0.787759, 0.787759, 0.787759, 1)
+theme_override_constants/line_spacing = 16
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Profile" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_mghpw")
+expand_mode = 1

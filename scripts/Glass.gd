@@ -11,6 +11,7 @@ extends RigidBody2D
 
 func _ready():
 	GameState.game_started.connect(queue_free)
+	GameState.all_shattered.connect(shatter)
 	key = _get_random_key()
 	is_water = not (GameState.allow_non_waters and randf() > 0.5)
 		
