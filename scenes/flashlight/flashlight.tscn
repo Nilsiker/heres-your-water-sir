@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8b1v1vrex75q"]
+[gd_scene load_steps=10 format=3 uid="uid://c8b1v1vrex75q"]
 
 [ext_resource type="Script" path="res://scripts/flashlight.gd" id="1_5hcbt"]
 [ext_resource type="Texture2D" uid="uid://ccyudratd0gbu" path="res://scenes/flashlight/flashlight.png" id="1_26jt2"]
 [ext_resource type="AudioStream" uid="uid://72rg8y86lefi" path="res://audio/light_on.mp3" id="3_os3wy"]
+[ext_resource type="Theme" uid="uid://61ii6arynmf1" path="res://fonts/font_theme.tres" id="4_2r54q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rydbx"]
 radius = 13.0
@@ -70,13 +71,14 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fwscx"]
-radius = 8.0
+radius = 4.0
 
 [node name="Flashlight" type="Node2D"]
 script = ExtResource("1_5hcbt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(-1, 1)
 texture = ExtResource("1_26jt2")
 hframes = 2
 metadata/_aseprite_wizard_config_ = {
@@ -94,6 +96,8 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "9998fb2406870f258ea36f4030438794"
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_rydbx")
@@ -108,7 +112,18 @@ stream = ExtResource("3_os3wy")
 volume_db = 12.0
 pitch_scale = 4.0
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Body" type="StaticBody2D" parent="."]
+collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CircleShape2D_fwscx")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -2.0
+offset_top = -5.0
+offset_right = 94.0
+offset_bottom = 25.0
+scale = Vector2(0.1, 0.1)
+theme = ExtResource("4_2r54q")
+theme_override_font_sizes/font_size = 36
+text = "[U] pick up"

@@ -38,7 +38,7 @@ func _get_random_key() -> String:
 func shatter():
 	var particles = shatter_particles.instantiate() as GPUParticles2D
 	particles.process_material = particles_material.duplicate(true)
-	get_tree().current_scene.get_node("Shards").add_child(particles)
+	get_tree().current_scene.get_node("Floor").add_child(particles)
 	particles.global_position = global_position
 	
 	var gradient: Gradient = particles.process_material.color_initial_ramp.gradient as Gradient

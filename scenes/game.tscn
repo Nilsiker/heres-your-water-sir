@@ -1,7 +1,6 @@
-[gd_scene load_steps=40 format=3 uid="uid://c7kbgteggdhyc"]
+[gd_scene load_steps=48 format=3 uid="uid://c7kbgteggdhyc"]
 
 [ext_resource type="Script" path="res://Godot Plugin 1.3/OvaniPlayer.gd" id="1_ts23s"]
-[ext_resource type="PackedScene" uid="uid://cixlvycbpq6tp" path="res://scenes/background/background.tscn" id="1_vii0p"]
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="2_ipxfd"]
 [ext_resource type="AudioStream" uid="uid://bbtytopqlgrqn" path="res://audio/Horror Suspense 2/Atmospheres And Loops/Crumbling Building Loop.wav" id="2_r0scf"]
 [ext_resource type="Theme" uid="uid://61ii6arynmf1" path="res://fonts/font_theme.tres" id="3_dslcu"]
@@ -10,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://w1c5oxilg2qv" path="res://scenes/player/player.tscn" id="5_blry0"]
 [ext_resource type="Script" path="res://Godot Plugin 1.3/OvaniSong.gd" id="5_kvyi6"]
 [ext_resource type="Script" path="res://scripts/GameCamera.gd" id="6_qtihm"]
+[ext_resource type="Texture2D" uid="uid://dpjmlnda1tpdp" path="res://scenes/background/background.png" id="6_y7ydr"]
 [ext_resource type="PackedScene" uid="uid://cm76qk02n1vyn" path="res://scenes/table/table.tscn" id="7_8he3r"]
 [ext_resource type="PackedScene" uid="uid://c1tm30shsujbh" path="res://scenes/background/floor.tscn" id="10_8yy4c"]
 [ext_resource type="PackedScene" uid="uid://d14rnp07l3evn" path="res://scenes/hand/hand.tscn" id="10_y8dhq"]
@@ -29,6 +29,8 @@
 [ext_resource type="AudioStream" uid="uid://bxv3h6ksusus5" path="res://audio/Horror Suspense 2/Impacts And Swooshes/Misc/Quake 001.wav" id="26_tavo7"]
 [ext_resource type="AudioStream" uid="uid://bl48tjqc1o78i" path="res://audio/Horror Suspense 2/Whispers And Ghosts/Whisper From Behind 001.wav" id="26_yg5e6"]
 [ext_resource type="AudioStream" uid="uid://ddpljspnrxoca" path="res://audio/Horror Suspense 2/Impacts And Swooshes/Misc/Quake 003.wav" id="27_28rri"]
+[ext_resource type="AudioStream" uid="uid://dlic16wvwsggk" path="res://audio/Horror Suspense 2/Musical/Mystic Piano 001.wav" id="30_pfamn"]
+[ext_resource type="Script" path="res://scripts/FinishArea.gd" id="30_u1bkx"]
 
 [sub_resource type="Resource" id="Resource_at46k"]
 script = ExtResource("5_kvyi6")
@@ -137,20 +139,6 @@ tracks/2/keys = {
 "values": [{
 "args": [],
 "method": &"finish_free_player_sequence"
-}]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Flashlight")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(11.9),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"on"
 }]
 }
 
@@ -267,7 +255,24 @@ _data = {
 "game_started": SubResource("Animation_omxsd")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dhs3u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pnpbs"]
+size = Vector2(267, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48oq8"]
+size = Vector2(80, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ou3nb"]
+size = Vector2(66, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ep3gt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcafu"]
+size = Vector2(216, 20)
+
 [node name="Game" type="Node2D"]
+y_sort_enabled = true
 
 [node name="HandOriginalPosition" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -279,7 +284,7 @@ QueuedSongs = Array[ExtResource("5_kvyi6")]([SubResource("Resource_at46k")])
 Volume = -12.0
 
 [node name="DrinkTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 2.0
 script = ExtResource("4_2c6mi")
 
 [node name="WaterDebug" type="Label" parent="."]
@@ -293,8 +298,13 @@ text = "0"
 horizontal_alignment = 2
 script = ExtResource("25_rba4k")
 
-[node name="Background" parent="." instance=ExtResource("1_vii0p")]
-position = Vector2(-1, 2)
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -211.0
+offset_top = -32.0
+offset_right = 45.0
+offset_bottom = 33.0
+texture = ExtResource("6_y7ydr")
+stretch_mode = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_ipxfd")
@@ -395,15 +405,18 @@ theme = ExtResource("3_dslcu")
 theme_override_colors/font_color = Color(0.641934, 0.641934, 0.641934, 1)
 theme_override_font_sizes/font_size = 42
 text = "
-[U] to pick up or drop glass
+U to pick up or drop glass
 
-[Q] or  [A] to drink
+Q / A to drink
+
+ESC to quit
 
 Do not upset him"
 horizontal_alignment = 1
 
 [node name="GameCamera" type="Camera2D" parent="."]
 zoom = Vector2(10, 10)
+position_smoothing_speed = 8.0
 script = ExtResource("6_qtihm")
 max_offset = Vector2(25, 15)
 
@@ -413,19 +426,18 @@ offset_x_range = 4.0
 
 [node name="Table" parent="." instance=ExtResource("7_8he3r")]
 unique_name_in_owner = true
-position = Vector2(-25, 18)
-
-[node name="Shards" type="Node2D" parent="."]
+position = Vector2(-25, 23)
 
 [node name="Floor" parent="." instance=ExtResource("10_8yy4c")]
 position = Vector2(0, 26)
 
 [node name="Chair" parent="." instance=ExtResource("11_0xr2v")]
-position = Vector2(-40, 19)
+position = Vector2(-40, 23)
 
 [node name="Player" parent="." instance=ExtResource("5_blry0")]
-position = Vector2(-41, 12)
-_speed = 32
+unique_name_in_owner = true
+position = Vector2(-40, 23)
+_speed = 16
 
 [node name="PromptHolder" type="Node2D" parent="."]
 position = Vector2(-34, 2)
@@ -458,16 +470,79 @@ autoplay = "Sway"
 
 [node name="Lamp" parent="." instance=ExtResource("11_g0a4j")]
 modulate = Color(0.637843, 0.637843, 0.637843, 1)
+top_level = true
 position = Vector2(-22, -33)
 
 [node name="Flashlight" parent="." instance=ExtResource("17_1olx6")]
 visible = false
-position = Vector2(21, 22)
+position = Vector2(21, 25)
 rotation = 0.155416
 
 [node name="EventManager" type="Node2D" parent="."]
 position = Vector2(0, 3)
 script = ExtResource("15_0tk5s")
+
+[node name="FinishScreen" type="CanvasLayer" parent="EventManager"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="EventManager/FinishScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EventManager/FinishScreen/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -35.5
+offset_right = 132.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="EventManager/FinishScreen/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_dslcu")
+theme_override_colors/font_color = Color(0.351903, 0.558423, 0.721013, 1)
+theme_override_font_sizes/font_size = 102
+text = "you escaped"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="EventManager/FinishScreen/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="TipLabel" type="Label" parent="EventManager/FinishScreen/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_dslcu")
+theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
+theme_override_font_sizes/font_size = 102
+text = "remember to stay hydrated"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="EventManager/FinishScreen/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -257.0
+offset_top = -114.0
+offset_right = 259.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_dslcu")
+theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
+theme_override_font_sizes/font_size = 64
+text = "press <space> to return to menu"
 
 [node name="GameOver" type="CanvasLayer" parent="EventManager"]
 visible = false
@@ -529,11 +604,16 @@ grow_vertical = 0
 theme = ExtResource("3_dslcu")
 theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
 theme_override_font_sizes/font_size = 64
-text = "press any key to return to menu"
+text = "press SPACE  to retry or hold ESC to quit"
 
 [node name="MonsterFace" type="Sprite2D" parent="EventManager"]
 
 [node name="MonsterFoot" type="Sprite2D" parent="EventManager"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EventManager"]
+libraries = {
+"": SubResource("AnimationLibrary_748oh")
+}
 
 [node name="GeneralSounds" type="AudioStreamPlayer2D" parent="EventManager"]
 position = Vector2(15, 23)
@@ -542,7 +622,45 @@ pitch_scale = 0.7
 max_polyphony = 8
 bus = &"Player"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="EventManager"]
-libraries = {
-"": SubResource("AnimationLibrary_748oh")
-}
+[node name="FinishAudio" type="AudioStreamPlayer2D" parent="EventManager"]
+stream = ExtResource("30_pfamn")
+volume_db = 12.0
+pitch_scale = 0.8
+bus = &"Monster"
+
+[node name="FinishArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("30_u1bkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishArea"]
+position = Vector2(-184, 4)
+shape = SubResource("RectangleShape2D_dhs3u")
+
+[node name="LevelBoundary" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBoundary"]
+position = Vector2(-74.5, 44)
+shape = SubResource("RectangleShape2D_pnpbs")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LevelBoundary"]
+position = Vector2(-218, 3)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_48oq8")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="LevelBoundary"]
+position = Vector2(51.9998, 0.999996)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_ou3nb")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="LevelBoundary"]
+position = Vector2(-202, 5)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_ep3gt")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="LevelBoundary"]
+position = Vector2(-68, 4.99956)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_kcafu")

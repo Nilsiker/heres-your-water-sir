@@ -1,4 +1,5 @@
-extends Sprite2D
+class_name Player
+extends CharacterBody2D
 
 @export var _speed = 8
 var holding: Glass
@@ -8,25 +9,24 @@ func _ready():
 	holding = null
 	DrinkChannel.choked.connect(_on_choke)
 	MonsterChannel.roared.connect(_on_monster_roared)
+	GameState.free_player_sequence_started.connect(try_drop)
 
 	$CoughTimer.timeout.connect(_on_choke_ended)
 	$AnimationPlayer.animation_finished.connect(func(_anim): $AnimationPlayer.play("Sit"))
 
-func _process(delta):# FREED
+func _process(_delta): # FREED
 	if GameState.state == GameState.State.Free:
-		offset.y = 4
-		var direction = Input.get_axis("left", "right")
+		var direction = Input.get_vector("left", "right", "up", "down")
 		if direction:
-			if direction > 0:
-				flip_h = false
-			if direction < 0:
-				flip_h = true
+			if direction.x > 0:
+				$Sprite.flip_h = false
+			if direction.x < 0:
+				$Sprite.flip_h = true
 			$AnimationPlayer.play("Walk")
-			global_position.x += direction * delta * _speed
+			velocity = direction * _speed
+			move_and_slide()
 		else:
 			$AnimationPlayer.play("Idle")
-
-		
 
 func _on_monster_roared():
 	$AnimationPlayer.speed_scale = 1 + GameState.upset_amount
@@ -56,6 +56,13 @@ func _on_anim_gulp_finished():
 func _on_choke_ended():
 	GameState.recover()
 	$AnimationPlayer.play("Sit")
+
+func try_drop():
+	if holding:
+		DrinkChannel.drop(holding)
+		$AnimationPlayer.play("Sit")
+		holding.freeze = false
+		holding = null
 	
 func _unhandled_input(event):
 	# CHAINED
@@ -64,17 +71,12 @@ func _unhandled_input(event):
 		
 		var glass = %Table.get_next_glass() as Glass
 		if event.is_action_pressed("U"):
-			if holding:
-				DrinkChannel.drop(holding)
-				$AnimationPlayer.play("Sit")
-				holding.freeze = false
-				holding = null
-				return
+			try_drop()
 
 			if glass:
 				holding = glass
 				DrinkChannel.hold(glass)
-				glass.reparent($GlassPosition)
+				glass.reparent($HandSocket)
 				glass.position = Vector2.ZERO
 				glass.freeze = true
 

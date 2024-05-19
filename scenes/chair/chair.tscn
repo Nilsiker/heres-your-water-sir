@@ -5,6 +5,7 @@
 [node name="Chair" type="Sprite2D"]
 texture_filter = 1
 texture = ExtResource("1_oxvsi")
+offset = Vector2(0, -4)
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 1,
 "keep_anim_length": false,

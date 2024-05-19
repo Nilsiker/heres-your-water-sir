@@ -25,7 +25,8 @@ enum State {
 	Chained,
 	InSequence,
 	Free,
-	GameOver
+	GameOver,
+	Finished
 }
 
 var state = State.Menu
@@ -42,7 +43,7 @@ var upset_amount = 0
 var calming_factor = 0.01
 
 var WATERS_DRUNK_TO_WIN:
-	get: return 10
+	get: return 25
 			
 func start_sequence():
 	GameState.state = State.InSequence
@@ -51,6 +52,11 @@ func start_sequence():
 func start_free_player_sequence():
 	GameState.state = State.InSequence
 	free_player_sequence_started.emit()
+
+func start_finish_game_sequence():
+	GameState.state = GameState.State.InSequence
+	game_finished_sequence_started.emit()
+
 
 func start():
 	upset_amount = 0
@@ -77,7 +83,7 @@ func increment_score():
 
 	water_drunk_updated.emit(waters_drunk)
 	if waters_drunk >= WATERS_DRUNK_TO_WIN:
-		free_player_sequence_started.emit()
+		start_free_player_sequence()
 
 func upset(added_upset):
 	upset_amount += added_upset

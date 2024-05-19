@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cm76qk02n1vyn"]
+[gd_scene load_steps=5 format=3 uid="uid://cm76qk02n1vyn"]
 
 [ext_resource type="Texture2D" uid="uid://bsxp80fc2wdoq" path="res://scenes/table/table.png" id="1_py6xe"]
 [ext_resource type="Script" path="res://scripts/Table.gd" id="2_20gqr"]
@@ -6,11 +6,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5i05a"]
 size = Vector2(19.1045, 3.0895)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8727"]
+size = Vector2(16, 1.0895)
+
 [node name="Table" type="Sprite2D"]
 texture_filter = 1
-position = Vector2(5.96046e-08, -2)
 scale = Vector2(0.75, 1)
 texture = ExtResource("1_py6xe")
+offset = Vector2(0, -5)
 script = ExtResource("2_20gqr")
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 1,
@@ -27,13 +30,22 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "9400f15e69247f949b690cbada7acff1"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(7.94728e-08, -5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -1.54475)
 shape = SubResource("RectangleShape2D_5i05a")
 
+[node name="PlayerCollider" type="StaticBody2D" parent="."]
+position = Vector2(0, 1)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollider"]
+position = Vector2(0, -1.54475)
+shape = SubResource("RectangleShape2D_y8727")
+
 [node name="Positions" type="Node2D" parent="."]
-position = Vector2(-5.96046e-08, -5)
+position = Vector2(1.98682e-08, -10)
 
 [node name="0" type="Node2D" parent="Positions"]
 position = Vector2(-8, -8)
@@ -51,3 +63,4 @@ position = Vector2(4, -8)
 position = Vector2(8, -8)
 
 [node name="Glasses" type="Node2D" parent="."]
+position = Vector2(7.94728e-08, -5)

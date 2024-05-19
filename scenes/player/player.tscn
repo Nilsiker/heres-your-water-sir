@@ -1,10 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://w1c5oxilg2qv"]
+[gd_scene load_steps=18 format=3 uid="uid://w1c5oxilg2qv"]
 
 [ext_resource type="Texture2D" uid="uid://bp6u7cyr0p4em" path="res://scenes/player/player.png" id="1_stk0o"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_ksbcf"]
 [ext_resource type="AudioStream" uid="uid://bm2e4n3yhp6ql" path="res://audio/cough.mp3" id="3_43822"]
 [ext_resource type="AudioStream" uid="uid://cpjay3qrwxucj" path="res://audio/gulp.mp3" id="3_c3c1i"]
 [ext_resource type="AudioStream" uid="uid://d265gv864e5ap" path="res://audio/finished.mp3" id="3_memp3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_41fx5"]
+radius = 1.0
+height = 8.0
 
 [sub_resource type="Animation" id="Animation_n15bi"]
 length = 0.7
@@ -35,14 +39,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("GlassPosition:position")
+tracks/2/path = NodePath("../HandSocket:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(4, -1), Vector2(4, 0), Vector2(4, -1), Vector2(4, 0), Vector2(4, -1)]
+"values": [Vector2(3, -11), Vector2(4, 0), Vector2(3, -11), Vector2(4, -10), Vector2(3, -11)]
 }
 
 [sub_resource type="Animation" id="Animation_iljem"]
@@ -74,19 +78,19 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("GlassPosition:position")
+tracks/2/path = NodePath("../HandSocket:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Vector2(3, -1), Vector2(3, -3), Vector2(3, -1)]
+"values": [Vector2(3, -12), Vector2(3, -14), Vector2(3, -12)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("GlassPosition:global_rotation")
+tracks/3/path = NodePath("../HandSocket:global_rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -98,7 +102,7 @@ tracks/3/keys = {
 tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("..")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -137,13 +141,37 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 1]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../HandSocket:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../HandSocket:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-3, -6), Vector2(-3, -5), Vector2(-3, -6)]
+}
 
 [sub_resource type="Animation" id="Animation_l5fpl"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GlassPosition:position")
+tracks/0/path = NodePath("../HandSocket:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -155,7 +183,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GlassPosition:rotation")
+tracks/1/path = NodePath("../HandSocket:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -195,7 +223,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("GlassPosition:rotation")
+tracks/2/path = NodePath("../HandSocket:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -207,14 +235,14 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("GlassPosition:position")
+tracks/3/path = NodePath("../HandSocket:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(5, 5)]
+"values": [Vector2(3, -6)]
 }
 
 [sub_resource type="Animation" id="Animation_hrjsi"]
@@ -243,6 +271,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [3, 4, 5, 6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../HandSocket:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, -6), Vector2(-1, -7), Vector2(-5, -7), Vector2(-1, -7)]
 }
 
 [sub_resource type="Animation" id="Animation_spdwg"]
@@ -302,13 +342,21 @@ streams_count = 1
 stream_0/stream = ExtResource("3_memp3")
 stream_0/weight = 1.0
 
-[node name="Player" type="Sprite2D"]
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_ksbcf")
+
+[node name="CoughTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, -11)
 texture = ExtResource("1_stk0o")
 hframes = 4
 vframes = 3
-frame = 8
-script = ExtResource("2_ksbcf")
+frame = 7
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 0,
 "keep_anim_length": false,
@@ -323,14 +371,16 @@ metadata/_aseprite_wizard_config_ = {
 }
 metadata/_aseprite_wizard_source_file_hash_ = "2398f00664148efc70c20c5dcf96059e"
 
-[node name="CoughTimer" type="Timer" parent="."]
-one_shot = true
+[node name="Collider" type="CollisionShape2D" parent="."]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_41fx5")
 
-[node name="GlassPosition" type="Node2D" parent="."]
+[node name="HandSocket" type="Node2D" parent="."]
 position = Vector2(4, -1)
 rotation = -0.785398
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
 libraries = {
 "": SubResource("AnimationLibrary_ybyr0")
 }
@@ -351,3 +401,6 @@ stream = SubResource("AudioStreamRandomizer_63ojf")
 volume_db = 12.0
 attenuation = 0.217638
 bus = &"Player"
+
+[node name="CameraPosition" type="Node2D" parent="."]
+position = Vector2(0, -21)
