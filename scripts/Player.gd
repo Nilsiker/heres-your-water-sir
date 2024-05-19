@@ -9,7 +9,7 @@ func _ready():
 	holding = null
 	DrinkChannel.choked.connect(_on_choke)
 	MonsterChannel.roared.connect(_on_monster_roared)
-	GameState.free_player_sequence_started.connect(try_drop)
+	GameState.free_player_sequence_started.connect(_on_freed)
 
 	$CoughTimer.timeout.connect(_on_choke_ended)
 	$AnimationPlayer.animation_finished.connect(func(_anim): $AnimationPlayer.play("Sit"))
@@ -56,6 +56,10 @@ func _on_anim_gulp_finished():
 func _on_choke_ended():
 	GameState.recover()
 	$AnimationPlayer.play("Sit")
+
+func _on_freed():
+	holding = null
+	$AnimationPlayer.speed_scale = 1
 
 func try_drop():
 	if holding:

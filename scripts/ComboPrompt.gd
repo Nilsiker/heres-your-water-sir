@@ -8,6 +8,8 @@ func _ready():
 	DrinkChannel.gulped.connect(set_combo_label)
 	DrinkChannel.choked.connect(_on_disable)
 	GameState.recovered.connect(_on_enable)
+	GameState.free_player_sequence_started.connect(func(): text = "")
+
 
 var modulate_tween: Tween
 var shadow_tween: Tween

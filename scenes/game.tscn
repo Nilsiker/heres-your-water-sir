@@ -296,7 +296,7 @@ stretch_mode = 1
 script = ExtResource("2_ipxfd")
 help = NodePath("Margins/Menu/Help")
 credits = NodePath("Margins/Menu/Credits")
-_credits_scroll_speed = 100.0
+_credits_scroll_speed = 75.0
 particles = NodePath("Margins/CPUParticles2D")
 
 [node name="Margins" type="MarginContainer" parent="UI"]
@@ -312,7 +312,7 @@ theme_override_constants/margin_bottom = 40
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="UI/Margins"]
 position = Vector2(918, -77)
-amount = 2
+amount = 20
 lifetime = 2.0
 emission_shape = 3
 emission_rect_extents = Vector2(360, 1)
@@ -369,41 +369,50 @@ text = "here's your water, sir"
 [node name="HSeparator" type="HSeparator" parent="UI/Margins/Menu/Options"]
 layout_mode = 2
 
-[node name="Play" type="Button" parent="UI/Margins/Menu/Options"]
+[node name="GridContainer" type="GridContainer" parent="UI/Margins/Menu/Options"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Play" type="Button" parent="UI/Margins/Menu/Options/GridContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 6
 theme = ExtResource("3_dslcu")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
 text = "play"
 
-[node name="Help" type="Button" parent="UI/Margins/Menu/Options"]
+[node name="Help" type="Button" parent="UI/Margins/Menu/Options/GridContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 6
 theme = ExtResource("3_dslcu")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
 text = "help"
 
-[node name="Credits" type="Button" parent="UI/Margins/Menu/Options"]
+[node name="Quit" type="Button" parent="UI/Margins/Menu/Options/GridContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
-size_flags_vertical = 6
-theme = ExtResource("3_dslcu")
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
-text = "credits"
-
-[node name="Quit" type="Button" parent="UI/Margins/Menu/Options"]
-custom_minimum_size = Vector2(0, 70)
-layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 6
 theme = ExtResource("3_dslcu")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
 text = "quit"
+
+[node name="Credits" type="Button" parent="UI/Margins/Menu/Options/GridContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = ExtResource("3_dslcu")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
+text = "credits"
 
 [node name="Help" type="VBoxContainer" parent="UI/Margins/Menu"]
 visible = false
@@ -483,7 +492,7 @@ script = ExtResource("15_0tk5s")
 visible = false
 script = ExtResource("18_pkmbw")
 scroll = NodePath("ColorRect/ScrollContainer")
-_speed = 100.0
+_speed = 75.0
 
 [node name="ColorRect" type="ColorRect" parent="EventManager/FinishScreen"]
 anchors_preset = 15
@@ -733,14 +742,14 @@ position = Vector2(-22, -33)
 
 [node name="Table" parent="." instance=ExtResource("7_8he3r")]
 unique_name_in_owner = true
-position = Vector2(-31, 24)
+position = Vector2(-30, 24)
 
 [node name="Chair" parent="." instance=ExtResource("11_0xr2v")]
 position = Vector2(-43, 24)
 
 [node name="Player" parent="." instance=ExtResource("5_blry0")]
 unique_name_in_owner = true
-position = Vector2(-44, 24)
+position = Vector2(-42, 24)
 _speed = 20
 
 [node name="Hand" parent="." instance=ExtResource("10_y8dhq")]
@@ -753,10 +762,10 @@ position = Vector2(21, 25)
 rotation = 0.155416
 
 [node name="Chain" parent="." instance=ExtResource("33_hsiks")]
-position = Vector2(-42, 24)
+position = Vector2(-40, 24)
 script = ExtResource("34_pebct")
 
-[connection signal="pressed" from="UI/Margins/Menu/Options/Play" to="UI" method="play"]
-[connection signal="pressed" from="UI/Margins/Menu/Options/Help" to="UI" method="show_help"]
-[connection signal="pressed" from="UI/Margins/Menu/Options/Credits" to="UI" method="show_credits"]
-[connection signal="pressed" from="UI/Margins/Menu/Options/Quit" to="UI" method="quit"]
+[connection signal="pressed" from="UI/Margins/Menu/Options/GridContainer/Play" to="UI" method="play"]
+[connection signal="pressed" from="UI/Margins/Menu/Options/GridContainer/Help" to="UI" method="show_help"]
+[connection signal="pressed" from="UI/Margins/Menu/Options/GridContainer/Quit" to="UI" method="quit"]
+[connection signal="pressed" from="UI/Margins/Menu/Options/GridContainer/Credits" to="UI" method="show_credits"]

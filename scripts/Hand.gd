@@ -9,11 +9,11 @@ var water: PackedScene = preload ("res://scenes/glass/glass.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GameState.player_freed.connect(queue_free)
 	DrinkChannel.spawned.connect(_on_glass_spawned)
 	DrinkChannel.shattered.connect(_on_glass_shattered)
 	DrinkChannel.choked.connect(_on_player_choked)
 	MonsterChannel.roared.connect(_on_roar)
-	GameState.player_freed.connect(queue_free)
 
 func _physics_process(_delta):
 	global_position = Vector2(round(target_pos.x), round(target_pos.y))
