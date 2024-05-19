@@ -17,10 +17,10 @@ var shadow_tween: Tween
 
 func _on_spawned():
 	if GameState.waters_drunk == 0:
-		get_tree().create_timer(4.0).timeout.connect(func(): 
+		get_tree().create_timer(3.0).timeout.connect(func(): 
 			if text.is_empty():
 				text = "U"
-				modulate.a = 0.5
+				modulate.a = 0.4
 		)
 
 func _on_glass_dropped(_glass: Glass):
