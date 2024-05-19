@@ -15,8 +15,8 @@ func _ready():
 
 func _on_game_started():
 	GLASS_AMOUNT = 3
-	timer().timeout.connect(spawn)
 	timer().start()
+	timer().timeout.connect(spawn)
 
 func gulp(glass: Glass):
 	gulped.emit(glass)
@@ -29,7 +29,6 @@ func drop(glass: Glass):
 	dropped.emit(glass)
 
 func shatter(glass: Glass):
-	GameState.glass_count -= 1
 	timer().wait_time =  max(0.8, timer().wait_time - 0.2)
 	shattered.emit(glass)
 	

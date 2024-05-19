@@ -49,10 +49,6 @@ var WATERS_DRUNK_TO_WIN:
 func start_sequence():
 	GameState.state = State.InSequence
 	start_sequence_started.emit()
-	allow_non_waters = false
-	allow_lamp_flickering = false
-	allow_lowercase = false
-	allow_sloppy_monster = false
 
 
 func start_free_player_sequence():
@@ -66,8 +62,14 @@ func start_finish_game_sequence():
 
 func start():
 	upset_amount = 0
+	glass_count = 0
 	waters_drunk = 0
 	water_drunk_updated.emit(waters_drunk)
+
+	allow_non_waters = false
+	allow_lamp_flickering = false
+	allow_lowercase = false
+	allow_sloppy_monster = false
 
 	state = State.Chained
 	game_started.emit()

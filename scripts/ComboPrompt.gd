@@ -11,13 +11,15 @@ func _ready():
 	GameState.recovered.connect(_on_enable)
 	GameState.free_player_sequence_started.connect(func(): text = "")
 	GameState.game_started.connect(func(): text = "")
+	GameState.game_over.connect(func(): text = "")
+	GameState.game_finished.connect(func(): text = "")
 
 
 var modulate_tween: Tween
 var shadow_tween: Tween
 
 func _on_spawned():
-	if GameState.waters_drunk == 0:
+	if GameState.glass_count == 1:
 		get_tree().create_timer(3.0).timeout.connect(func(): 
 			if text.is_empty():
 				text = "U"
