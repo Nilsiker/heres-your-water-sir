@@ -28,7 +28,7 @@ func _on_monster_roared():
 
 func _on_player_freed():
 	_target = %Player/CameraPosition
-	# zoom = Vector2.ONE * 6
+	zoom = Vector2.ONE * 8
 	position = Vector2.ZERO
 
 func _process(delta):

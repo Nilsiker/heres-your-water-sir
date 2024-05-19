@@ -71,7 +71,9 @@ func _unhandled_input(event):
 		
 		var glass = %Table.get_next_glass() as Glass
 		if event.is_action_pressed("U"):
-			try_drop()
+			if holding:
+				try_drop()
+				return
 
 			if glass:
 				holding = glass

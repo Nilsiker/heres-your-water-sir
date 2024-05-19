@@ -10,6 +10,7 @@ extends RigidBody2D
 @onready var particles_material = preload ("res://scenes/particles/shatter_particles.tres")
 
 func _ready():
+	GameState.game_started.connect(queue_free)
 	key = _get_random_key()
 	is_water = not (GameState.allow_non_waters and randf() > 0.5)
 		
