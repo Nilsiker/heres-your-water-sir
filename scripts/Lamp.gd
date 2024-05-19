@@ -7,11 +7,12 @@ var flicker_target = 0.0
 func _ready():
 	GameState.game_started.connect(on)
 	GameState.player_freed.connect(off_but_flashlight)
+	GameState.free_player_sequence_started.connect(func(): GameState.allow_lamp_flickering = false)
 	$AnimationPlayer.play("Unlit")
 	$Timer.timeout.connect(flicker)
 
 func _process(delta):
-	$Flicker.color.a = move_toward($Flicker.color.a, flicker_target, 5 * delta)
+	$Flicker.color.a = move_toward($Flicker.color.a, flicker_target, 2 * delta)
 
 
 func on():

@@ -33,6 +33,7 @@ func _process(delta):
 
 func play():
 	$Margins/Menu.visible = false
+	$Margins/Warning.visible = false
 	
 	GameState.start_sequence()
 

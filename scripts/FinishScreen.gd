@@ -21,3 +21,7 @@ func _on_visible():
 
 func start_scrolling():
 	scrolling = true
+
+func _input(event):
+	if visible and target_scroll > scroll.scroll_vertical and event.is_action_pressed("continue"):
+		get_tree().change_scene_to_file("res://scenes/game.tscn")

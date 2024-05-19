@@ -36,8 +36,6 @@ func _on_game_finished_sequence_started():
 
 
 func _input(event):
-	if $FinishScreen.visible and event.is_action_pressed("continue"):
-		get_tree().change_scene_to_file("res://scenes/game.tscn")
 	if $GameOver.visible and event.is_action_pressed("continue"):
 		$GameOver.visible = false
 		$AnimationPlayer.play("quickstart")

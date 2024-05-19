@@ -329,6 +329,16 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 40
 
+[node name="Warning" type="Label" parent="UI/Margins"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("20_wddpf")
+text = "WARNING: Contains flashing lights"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
 [node name="CPUParticles2D" type="CPUParticles2D" parent="UI/Margins"]
 position = Vector2(918, -77)
 amount = 20
@@ -768,7 +778,9 @@ position = Vector2(0, 26)
 visible = false
 modulate = Color(0.637843, 0.637843, 0.637843, 1)
 top_level = true
+z_index = 1
 position = Vector2(-22, -33)
+flicker_max = 0.6
 
 [node name="Table" parent="." instance=ExtResource("7_8he3r")]
 unique_name_in_owner = true
@@ -783,6 +795,7 @@ position = Vector2(-42, 24)
 _speed = 20
 
 [node name="Hand" parent="." instance=ExtResource("10_y8dhq")]
+z_index = 1
 position = Vector2(5, -14)
 offset_x_range = 4.0
 
