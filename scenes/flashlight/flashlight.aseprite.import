@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bvvw2igwybxyn"
+path="res://.godot/imported/flashlight.aseprite-8c289e0f2dd7d85643926f83767c0bb2.res"
+
+[deps]
+
+source_file="res://scenes/flashlight/flashlight.aseprite"
+dest_files=["res://.godot/imported/flashlight.aseprite-8c289e0f2dd7d85643926f83767c0bb2.res"]
+
+[params]
+

@@ -9,6 +9,7 @@ size = Vector2(19.1045, 3.0895)
 [node name="Table" type="Sprite2D"]
 texture_filter = 1
 position = Vector2(5.96046e-08, -2)
+scale = Vector2(0.75, 1)
 texture = ExtResource("1_py6xe")
 script = ExtResource("2_20gqr")
 metadata/_aseprite_wizard_config_ = {

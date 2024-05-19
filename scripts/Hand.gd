@@ -14,14 +14,14 @@ func _ready():
 	DrinkChannel.choked.connect(_on_player_choked)
 	MonsterChannel.roared.connect(_on_roar)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	global_position = Vector2(round(target_pos.x), round(target_pos.y))
 
 var tween: Tween
 func _on_glass_spawned():
 	if not GameState.state == GameState.State.Chained: return
 	if (tween and tween.is_running()) or (back_tween and back_tween.is_running()): return
-	var random_offset = randf_range( - offset_x_range, offset_x_range)
+	var random_offset = randf_range( - offset_x_range, offset_x_range) if GameState.allow_sloppy_monster else 0.0
 
 	var glass = water.instantiate() as Glass
 	glass.name = "Glass"
@@ -43,7 +43,6 @@ func _on_player_choked():
 
 func _on_glass_shattered(glass: Glass):
 	if not GameState.state == GameState.State.Chained: return
-
 	if glass.is_water and glass.amount > 0:
 		var timer = get_tree().create_timer(.25)
 		timer.timeout.connect(MonsterChannel.roar)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3o63a1cwy26t"]
+[gd_scene load_steps=14 format=3 uid="uid://c3o63a1cwy26t"]
 
-[ext_resource type="Texture2D" uid="uid://d3r0iprihmm1k" path="res://scenes/lamp/lamp.png" id="1_rtv2m"]
+[ext_resource type="Texture2D" uid="uid://ok4y86hf3j2i" path="res://scenes/lamp/sprite.png" id="1_6dvmm"]
 [ext_resource type="Script" path="res://scripts/Lamp.gd" id="2_dm2he"]
 [ext_resource type="AudioStream" uid="uid://72rg8y86lefi" path="res://audio/light_on.mp3" id="3_0fceq"]
+[ext_resource type="Texture2D" uid="uid://c6f731nm8m5wa" path="res://scenes/lamp/darkness.png" id="4_h6qd7"]
 
 [sub_resource type="Animation" id="Animation_q1xhg"]
 length = 0.1
@@ -31,6 +32,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_ars05"]
 length = 0.1
@@ -54,6 +79,30 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -88,8 +137,61 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_7n8bf"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_42wce"]
 _data = {
+"Flashlight": SubResource("Animation_7n8bf"),
 "Lit": SubResource("Animation_q1xhg"),
 "Unlit": SubResource("Animation_ars05"),
 "default": SubResource("Animation_tn73o")
@@ -139,7 +241,7 @@ loop = true
 
 [node name="Lamp" type="Sprite2D"]
 texture_filter = 1
-texture = ExtResource("1_rtv2m")
+texture = ExtResource("1_6dvmm")
 offset = Vector2(18.465, 34.38)
 hframes = 2
 frame = 1
@@ -147,7 +249,7 @@ script = ExtResource("2_dm2he")
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 0,
 "keep_anim_length": false,
-"layer": "",
+"layer": "sprite",
 "o_ex_p": "",
 "o_folder": "",
 "o_name": "",
@@ -156,7 +258,10 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://scenes/lamp/lamp.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "ad9c44e385f195346c85ab971472d79c"
+metadata/_aseprite_wizard_source_file_hash_ = "8a65dd77464b336ac582b30cbfe3be3e"
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -178,3 +283,28 @@ volume_db = 12.0
 stream = ExtResource("3_0fceq")
 volume_db = 18.0
 bus = &"Player"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+texture_filter = 1
+texture = ExtResource("4_h6qd7")
+offset = Vector2(18.465, 34.38)
+hframes = 2
+vframes = 2
+frame = 1
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "darkness",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://scenes/lamp/lamp.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "8a65dd77464b336ac582b30cbfe3be3e"

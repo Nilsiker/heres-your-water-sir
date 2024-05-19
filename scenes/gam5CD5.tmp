@@ -425,7 +425,6 @@ position = Vector2(-40, 19)
 
 [node name="Player" parent="." instance=ExtResource("5_blry0")]
 position = Vector2(-41, 12)
-_speed = 32
 
 [node name="PromptHolder" type="Node2D" parent="."]
 position = Vector2(-34, 2)
@@ -461,7 +460,6 @@ modulate = Color(0.637843, 0.637843, 0.637843, 1)
 position = Vector2(-22, -33)
 
 [node name="Flashlight" parent="." instance=ExtResource("17_1olx6")]
-visible = false
 position = Vector2(21, 22)
 rotation = 0.155416
 

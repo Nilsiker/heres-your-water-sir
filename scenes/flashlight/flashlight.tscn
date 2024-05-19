@@ -1,0 +1,114 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8b1v1vrex75q"]
+
+[ext_resource type="Script" path="res://scripts/flashlight.gd" id="1_5hcbt"]
+[ext_resource type="Texture2D" uid="uid://ccyudratd0gbu" path="res://scenes/flashlight/flashlight.png" id="1_26jt2"]
+[ext_resource type="AudioStream" uid="uid://72rg8y86lefi" path="res://audio/light_on.mp3" id="3_os3wy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rydbx"]
+radius = 13.0
+
+[sub_resource type="Animation" id="Animation_y0p1f"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_55tlf"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hk0vu"]
+_data = {
+"Lit": SubResource("Animation_y0p1f"),
+"Unlit": SubResource("Animation_55tlf")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fwscx"]
+radius = 8.0
+
+[node name="Flashlight" type="Node2D"]
+script = ExtResource("1_5hcbt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_26jt2")
+hframes = 2
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://scenes/flashlight/flashlight.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "9998fb2406870f258ea36f4030438794"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_rydbx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hk0vu")
+}
+
+[node name="Click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_os3wy")
+volume_db = 12.0
+pitch_scale = 4.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_fwscx")

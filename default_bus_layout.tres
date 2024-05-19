@@ -1,8 +1,15 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://cxm134gmciudb"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://cxm134gmciudb"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_2n3ja"]
+resource_name = "Reverb"
+room_size = 0.4
+damping = 0.6
+spread = 0.5
+wet = 0.2
 
 [sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_71asp"]
 resource_name = "Distortion"
-drive = 0.6
+drive = 0.4
 post_gain = -12.0
 
 [sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_tjc4v"]
@@ -15,7 +22,18 @@ resource_name = "LowPassFilter"
 cutoff_hz = 1000.0
 db = 1
 
+[sub_resource type="AudioEffectEQ6" id="AudioEffectEQ6_miu2a"]
+resource_name = "EQ6"
+band_db/32_hz = 3.4
+band_db/100_hz = 1.1
+band_db/320_hz = 0.5
+band_db/1000_hz = -2.3
+band_db/3200_hz = -8.0
+band_db/10000_hz = -4.0
+
 [resource]
+bus/0/effect/0/effect = SubResource("AudioEffectReverb_2n3ja")
+bus/0/effect/0/enabled = true
 bus/1/name = &"Player"
 bus/1/solo = false
 bus/1/mute = false
@@ -34,3 +52,5 @@ bus/2/effect/0/effect = SubResource("AudioEffectDistortion_tjc4v")
 bus/2/effect/0/enabled = true
 bus/2/effect/1/effect = SubResource("AudioEffectLowPassFilter_b2sqo")
 bus/2/effect/1/enabled = true
+bus/2/effect/2/effect = SubResource("AudioEffectEQ6_miu2a")
+bus/2/effect/2/enabled = true

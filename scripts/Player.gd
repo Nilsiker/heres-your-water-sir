@@ -1,5 +1,6 @@
 extends Sprite2D
 
+@export var _speed = 8
 var holding: Glass
 
 # Called when the node enters the scene tree for the first time.
@@ -10,6 +11,22 @@ func _ready():
 
 	$CoughTimer.timeout.connect(_on_choke_ended)
 	$AnimationPlayer.animation_finished.connect(func(_anim): $AnimationPlayer.play("Sit"))
+
+func _process(delta):# FREED
+	if GameState.state == GameState.State.Free:
+		offset.y = 4
+		var direction = Input.get_axis("left", "right")
+		if direction:
+			if direction > 0:
+				flip_h = false
+			if direction < 0:
+				flip_h = true
+			$AnimationPlayer.play("Walk")
+			global_position.x += direction * delta * _speed
+		else:
+			$AnimationPlayer.play("Idle")
+
+		
 
 func _on_monster_roared():
 	$AnimationPlayer.speed_scale = 1 + GameState.upset_amount
@@ -41,33 +58,34 @@ func _on_choke_ended():
 	$AnimationPlayer.play("Sit")
 	
 func _unhandled_input(event):
-	if not GameState.state == GameState.State.Chained: return
-	if $CoughTimer.time_left: return
-	
-	var glass = %Table.get_next_glass() as Glass
-	if event.is_action_pressed("U"):
-		if holding:
-			DrinkChannel.drop(holding)
-			$AnimationPlayer.play("Sit")
-			holding.freeze = false
-			holding = null
-			return
+	# CHAINED
+	if GameState.state == GameState.State.Chained:
+		if $CoughTimer.time_left: return
+		
+		var glass = %Table.get_next_glass() as Glass
+		if event.is_action_pressed("U"):
+			if holding:
+				DrinkChannel.drop(holding)
+				$AnimationPlayer.play("Sit")
+				holding.freeze = false
+				holding = null
+				return
 
-		if glass:
-			holding = glass
-			DrinkChannel.hold(glass)
-			glass.reparent($GlassPosition)
-			glass.position = Vector2.ZERO
-			glass.freeze = true
+			if glass:
+				holding = glass
+				DrinkChannel.hold(glass)
+				glass.reparent($GlassPosition)
+				glass.position = Vector2.ZERO
+				glass.freeze = true
 
-	elif event.is_action_pressed("Q"):
-		if holding and holding.key.to_upper() == "Q":
-			_gulp()
-		else:
-			DrinkChannel.choke()
+		elif event.is_action_pressed("Q"):
+			if holding and holding.key.to_upper() == "Q":
+				_gulp()
+			else:
+				DrinkChannel.choke()
 
-	elif event.is_action_pressed("A"):
-		if holding and holding.key.to_upper() == "A":
-			_gulp()
-		else:
-			DrinkChannel.choke()
+		elif event.is_action_pressed("A"):
+			if holding and holding.key.to_upper() == "A":
+				_gulp()
+			else:
+				DrinkChannel.choke()
