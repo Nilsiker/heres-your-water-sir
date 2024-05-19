@@ -1,5 +1,9 @@
 extends Node2D
 
+@export var game_over_tip_label: Label
+
+@export var game_over_tips: Array = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameState.start_sequence_started.connect(_on_start_sequence_started)
@@ -21,6 +25,7 @@ func finish_free_player_sequence():
 	GameState.free_player()
 
 func _on_game_over():
+	game_over_tip_label.text = game_over_tips.pick_random()
 	$AnimationPlayer.play("game_over")
 
 
@@ -35,7 +40,7 @@ func _input(event):
 		get_tree().change_scene_to_file("res://scenes/game.tscn")
 	if $GameOver.visible and event.is_action_pressed("continue"):
 		$GameOver.visible = false
-		$AnimationPlayer.play("game_started")
+		$AnimationPlayer.play("quickstart")
 
 func _on_player_freed():
 	get_tree().current_scene.get_node("Flashlight").on()

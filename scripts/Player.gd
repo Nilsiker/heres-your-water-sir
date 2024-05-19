@@ -9,6 +9,7 @@ func _ready():
 	holding = null
 	DrinkChannel.choked.connect(_on_choke)
 	MonsterChannel.roared.connect(_on_monster_roared)
+	GameState.game_started.connect(_on_game_started)
 	GameState.free_player_sequence_started.connect(_on_freed)
 
 	$CoughTimer.timeout.connect(_on_choke_ended)
@@ -27,6 +28,10 @@ func _process(_delta): # FREED
 			move_and_slide()
 		else:
 			$AnimationPlayer.play("Idle")
+
+func _on_game_started():
+	holding = null
+	$AnimationPlayer.speed_scale = 1
 
 func _on_monster_roared():
 	$AnimationPlayer.speed_scale = 1 + GameState.upset_amount

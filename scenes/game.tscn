@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c7kbgteggdhyc"]
+[gd_scene load_steps=55 format=3 uid="uid://c7kbgteggdhyc"]
 
 [ext_resource type="Script" path="res://Godot Plugin 1.3/OvaniPlayer.gd" id="1_ts23s"]
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="2_ipxfd"]
@@ -222,11 +222,29 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_q2qbx"]
+resource_name = "quickstart"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finish_start_sequence"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_748oh"]
 _data = {
 "free_player": SubResource("Animation_affhs"),
 "game_over": SubResource("Animation_cojnx"),
-"game_started": SubResource("Animation_omxsd")
+"game_started": SubResource("Animation_omxsd"),
+"quickstart": SubResource("Animation_q2qbx")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dhs3u"]
@@ -494,9 +512,11 @@ Volume = -12.0
 wait_time = 8.0
 script = ExtResource("4_2c6mi")
 
-[node name="EventManager" type="Node2D" parent="."]
+[node name="EventManager" type="Node2D" parent="." node_paths=PackedStringArray("game_over_tip_label")]
 position = Vector2(0, 3)
 script = ExtResource("15_0tk5s")
+game_over_tip_label = NodePath("GameOver/ColorRect/VBoxContainer/TipLabel")
+game_over_tips = ["coughing upsets it", "it hates wasted water", "odd liquids are not meant for you"]
 
 [node name="FinishScreen" type="CanvasLayer" parent="EventManager" node_paths=PackedStringArray("scroll")]
 visible = false

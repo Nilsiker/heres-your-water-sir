@@ -10,6 +10,7 @@ func _ready():
 	DrinkChannel.choked.connect(_on_disable)
 	GameState.recovered.connect(_on_enable)
 	GameState.free_player_sequence_started.connect(func(): text = "")
+	GameState.game_started.connect(func(): text = "")
 
 
 var modulate_tween: Tween
