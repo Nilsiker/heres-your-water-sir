@@ -46,7 +46,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(3, -11), Vector2(4, 0), Vector2(3, -11), Vector2(4, -10), Vector2(3, -11)]
+"values": [Vector2(3, -11), Vector2(4, -11), Vector2(3, -11), Vector2(4, -10), Vector2(3, -11)]
 }
 
 [sub_resource type="Animation" id="Animation_iljem"]
@@ -356,7 +356,7 @@ position = Vector2(0, -11)
 texture = ExtResource("1_stk0o")
 hframes = 4
 vframes = 3
-frame = 1
+frame = 10
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 0,
 "keep_anim_length": false,
