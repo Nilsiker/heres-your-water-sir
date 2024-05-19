@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c7kbgteggdhyc"]
+[gd_scene load_steps=53 format=3 uid="uid://c7kbgteggdhyc"]
 
 [ext_resource type="Script" path="res://Godot Plugin 1.3/OvaniPlayer.gd" id="1_ts23s"]
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="2_ipxfd"]
@@ -32,6 +32,8 @@
 [ext_resource type="AudioStream" uid="uid://ddpljspnrxoca" path="res://audio/Horror Suspense 2/Impacts And Swooshes/Misc/Quake 003.wav" id="27_28rri"]
 [ext_resource type="AudioStream" uid="uid://dlic16wvwsggk" path="res://audio/Horror Suspense 2/Musical/Mystic Piano 001.wav" id="30_pfamn"]
 [ext_resource type="Script" path="res://scripts/FinishArea.gd" id="30_u1bkx"]
+[ext_resource type="PackedScene" uid="uid://cuhsgf8j2010m" path="res://scenes/chain/chain.tscn" id="33_hsiks"]
+[ext_resource type="Script" path="res://scripts/Chain.gd" id="34_pebct"]
 
 [sub_resource type="Gradient" id="Gradient_fusm3"]
 interpolation_mode = 1
@@ -401,7 +403,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_wgew1")
 text = "quit"
 
 [node name="Help" type="VBoxContainer" parent="UI/Margins/Menu"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -411,29 +412,33 @@ alignment = 2
 [node name="Title" type="Label" parent="UI/Margins/Menu/Help"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("3_dslcu")
+theme = ExtResource("20_wddpf")
 theme_override_colors/font_color = Color(0.641934, 0.641934, 0.641934, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "how to play"
 horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="UI/Margins/Menu/Help"]
-layout_mode = 2
 
 [node name="Controls" type="Label" parent="UI/Margins/Menu/Help"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("3_dslcu")
+theme = ExtResource("20_wddpf")
 theme_override_colors/font_color = Color(0.641934, 0.641934, 0.641934, 1)
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 20
 text = "
 U to pick up or drop glass
 
 Q / A to drink
 
-ESC to quit
+ESC to quit"
+horizontal_alignment = 1
 
-Do not upset him"
+[node name="Controls2" type="Label" parent="UI/Margins/Menu/Help"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("3_dslcu")
+theme_override_colors/font_color = Color(1, 1, 1, 0.129412)
+theme_override_font_sizes/font_size = 64
+text = "Keep it calm"
 horizontal_alignment = 1
 
 [node name="Credits" type="ScrollContainer" parent="UI/Margins/Menu"]
@@ -716,6 +721,19 @@ max_offset = Vector2(25, 15)
 [node name="Floor" parent="." instance=ExtResource("10_8yy4c")]
 position = Vector2(0, 26)
 
+[node name="Lamp" parent="." instance=ExtResource("11_g0a4j")]
+visible = false
+modulate = Color(0.637843, 0.637843, 0.637843, 1)
+top_level = true
+position = Vector2(-22, -33)
+
+[node name="Table" parent="." instance=ExtResource("7_8he3r")]
+unique_name_in_owner = true
+position = Vector2(-31, 24)
+
+[node name="Chair" parent="." instance=ExtResource("11_0xr2v")]
+position = Vector2(-43, 24)
+
 [node name="Player" parent="." instance=ExtResource("5_blry0")]
 unique_name_in_owner = true
 position = Vector2(-44, 24)
@@ -730,18 +748,9 @@ visible = false
 position = Vector2(21, 25)
 rotation = 0.155416
 
-[node name="Lamp" parent="." instance=ExtResource("11_g0a4j")]
-visible = false
-modulate = Color(0.637843, 0.637843, 0.637843, 1)
-top_level = true
-position = Vector2(-22, -33)
-
-[node name="Table" parent="." instance=ExtResource("7_8he3r")]
-unique_name_in_owner = true
-position = Vector2(-31, 24)
-
-[node name="Chair" parent="." instance=ExtResource("11_0xr2v")]
-position = Vector2(-43, 24)
+[node name="Chain" parent="." instance=ExtResource("33_hsiks")]
+position = Vector2(-42, 24)
+script = ExtResource("34_pebct")
 
 [connection signal="pressed" from="UI/Margins/Menu/Options/Play" to="UI" method="play"]
 [connection signal="pressed" from="UI/Margins/Menu/Options/Help" to="UI" method="show_help"]

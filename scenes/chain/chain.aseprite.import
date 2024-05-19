@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cjgr5kqqvrdcf"
+path="res://.godot/imported/chain.aseprite-20ddf73e291a3e7cf0d06ab21d602984.res"
+
+[deps]
+
+source_file="res://scenes/chain/chain.aseprite"
+dest_files=["res://.godot/imported/chain.aseprite-20ddf73e291a3e7cf0d06ab21d602984.res"]
+
+[params]
+
